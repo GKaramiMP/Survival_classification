@@ -13,9 +13,9 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="2" />
-          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -66,6 +66,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -73,11 +74,15 @@
               <item name="survival_classification" type="b2602c69:ProjectViewProjectNode" />
               <item name="survival_classification" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="survival_classification" type="b2602c69:ProjectViewProjectNode" />
+              <item name="survival_classification" type="462c0819:PsiDirectoryNode" />
+              <item name="joint" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
