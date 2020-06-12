@@ -188,9 +188,9 @@ class Network(object):
             fcg = tf.layers.dense(drop5, 2, activation=tf.nn.leaky_relu)
             out_grad = tf.nn.softmax(fcg)
 
-        # with tf.variable_scope('fcc'):  # out survival
-        #     fcs = tf.layers.dense(drop5, 3, activation=tf.nn.leaky_relu)
-        #     out_survival = tf.nn.softmax(fcs)
+        with tf.variable_scope('fcc'):  # out survival
+            fcs = tf.layers.dense(drop5, 3, activation=tf.nn.leaky_relu)
+            out_survival = tf.nn.softmax(fcs)
 
         return out_grad #, out_survival
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=Job012_goli
-#SBATCH --output=/exports/lkeb-hpc/gkarami/Code/Jobs/7_output_jointly.txt
+#SBATCH --output=/exports/lkeb-hpc/gkarami/Code/Jobs/13_output_jointly.txt
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem-per-cpu=5200

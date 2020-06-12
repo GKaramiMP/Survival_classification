@@ -662,7 +662,7 @@ def train_model():
     #train_dataset = train_dataset.astype('float32') / 255.
     # train_dataset = tf.keras.utils.normalize(train_dataset, axis=1)
 #==================================================================================
-    logno =10
+    logno =16
     length = 64
     channel = 1
     volume = 5
@@ -678,8 +678,7 @@ def train_model():
     labels_survival = tf.placeholder(tf.float32, [None, n_output_survival], name='survival_labels')
     is_training = tf.placeholder(tf.bool,name='is_training')
 
-    ########################################################################
-
+    #######################################################################
 
     output_graph = True
     net = Network(
@@ -718,10 +717,9 @@ def train_model():
     epoch = 15000
 
     with tf.variable_scope('loss'):
-        # cross_entropy = -tf.reduce_mean(labels_grad * tf.log(output_grad))\
-        #                 -tf.reduce_mean(labels_survival * tf.log(output_survival))
-        cross_entropy = - tf.reduce_mean(labels_grad * tf.log(output_grad))
-        # -sumx in X P(x) * log(Q(x))
+        cross_entropy = - tf.reduce_mean(labels_grad * tf.log(output_grad))\
+                        +tf.reduce_mean((labels_grad+output_grad)- 2 * (labels_grad * output_grad ))
+            # -sumx in X P(x) * log(Q(x))
     tf.summary.scalar("cross_entropy", cross_entropy)
 
 

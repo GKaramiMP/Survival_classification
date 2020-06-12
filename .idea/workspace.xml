@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="04ddbb9e-5eae-4a22-ba11-7d923ec94632" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/joint/singletask_net.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/survival_classification.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/survival_classification.iml" afterDir="false" />
+    <list default="true" id="04ddbb9e-5eae-4a22-ba11-7d923ec94632" name="Default Changelist" comment="single task &amp; multi task">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/joint/fortest.py" beforeDir="false" afterPath="$PROJECT_DIR$/joint/fortest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/joint/job.sh" beforeDir="false" afterPath="$PROJECT_DIR$/joint/job.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/joint/jointly.py" beforeDir="false" afterPath="$PROJECT_DIR$/joint/jointly.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/joint/jointlysingle.py" beforeDir="false" afterPath="$PROJECT_DIR$/joint/jointlysingle.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/joint/net.py" beforeDir="false" afterPath="$PROJECT_DIR$/joint/net.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/joint/submit_job.py" beforeDir="false" afterPath="$PROJECT_DIR$/joint/submit_job.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,22 +33,22 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="2" />
-          <entry key="py" value="5329" />
-          <entry key="sh" value="148" />
-          <entry key="txt" value="45" />
+          <entry key="py" value="5498" />
+          <entry key="sh" value="174" />
+          <entry key="txt" value="58" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Bash" value="148" />
-          <entry key="PLAIN_TEXT" value="47" />
-          <entry key="Python" value="5329" />
+          <entry key="Bash" value="174" />
+          <entry key="PLAIN_TEXT" value="60" />
+          <entry key="Python" value="5498" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gitignore" value="3" />
-          <entry key="py" value="24" />
+          <entry key="py" value="27" />
           <entry key="sh" value="1" />
         </counts>
       </usages-collector>
@@ -61,7 +56,7 @@
         <counts>
           <entry key="Bash" value="1" />
           <entry key="PLAIN_TEXT" value="4" />
-          <entry key="Python" value="23" />
+          <entry key="Python" value="26" />
         </counts>
       </usages-collector>
     </session>
@@ -71,20 +66,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/joint/jointly.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-418">
-              <caret line="628" column="67" selection-start-line="628" selection-start-column="67" selection-end-line="628" selection-end-column="67" />
-              <folding>
-                <element signature="e#1#10#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/joint/jointlysingle.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="664" column="13" selection-start-line="664" selection-start-column="13" selection-end-line="664" selection-end-column="13" />
+            <state relative-caret-position="174">
+              <caret line="714" column="129" selection-start-line="714" selection-start-column="129" selection-end-line="714" selection-end-column="129" />
               <folding>
                 <element signature="e#1#10#0" expanded="true" />
               </folding>
@@ -93,10 +76,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/joint/jointlysingle.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="720" column="40" selection-start-line="720" selection-start-column="40" selection-end-line="720" selection-end-column="40" />
+              <folding>
+                <element signature="e#1#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/joint/net.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="149" column="75" selection-start-line="149" selection-start-column="75" selection-end-line="149" selection-end-column="75" />
+            <state relative-caret-position="239">
+              <caret line="194" column="25" selection-start-line="194" selection-start-column="25" selection-end-line="194" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -104,8 +99,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/tensorflow/python/client/session.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="678" selection-start-line="678" selection-end-line="678" />
+            <state relative-caret-position="105">
+              <caret line="1347" selection-start-line="1347" selection-end-line="1347" />
             </state>
           </provider>
         </entry>
@@ -140,8 +135,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/joint/job.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="32" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
+            <state relative-caret-position="255">
+              <caret line="17" column="81" selection-start-line="17" selection-start-column="81" selection-end-line="17" selection-end-column="81" />
             </state>
           </provider>
         </entry>
@@ -171,9 +166,11 @@
       <find>save</find>
       <find>net</find>
       <find>opt</find>
-      <find>labels_grad</find>
       <find>.run</find>
       <find>betas</find>
+      <find>labels_grad</find>
+      <find>output_grad</find>
+      <find>cross</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -187,10 +184,10 @@
         <option value="$PROJECT_DIR$/joint/fortest.py" />
         <option value="$PROJECT_DIR$/joint/singletask_net.py" />
         <option value="$PROJECT_DIR$/joint/singletask_jointly.py" />
+        <option value="$PROJECT_DIR$/joint/net.py" />
         <option value="$PROJECT_DIR$/joint/job.sh" />
         <option value="$PROJECT_DIR$/joint/jointly.py" />
         <option value="$PROJECT_DIR$/joint/jointlysingle.py" />
-        <option value="$PROJECT_DIR$/joint/net.py" />
       </list>
     </option>
   </component>
@@ -234,6 +231,117 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/joint" />
     </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/survival_classification.iml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/joint/jointly.py</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -400,19 +508,27 @@
       <option name="project" value="LOCAL" />
       <updated>1591868563237</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="single task &amp; multi task">
+      <created>1591951152430</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1591951152430</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1536" height="801" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.59618443" visible="true" weight="0.20330033" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.59618443" visible="true" weight="0.15181518" />
       <window_info id="Structure" order="1" sideWeight="0.40381557" side_tool="true" weight="0.20330033" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.1510264" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3328446" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37683284" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.45747802" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -431,7 +547,19 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="survival classification" />
     <MESSAGE value="single task" />
-    <option name="LAST_COMMIT_MESSAGE" value="single task" />
+    <MESSAGE value="single task &amp; multi task" />
+    <option name="LAST_COMMIT_MESSAGE" value="single task &amp; multi task" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/joint/jointly.py</url>
+          <line>719</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
@@ -518,13 +646,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/tensorflow/python/framework/ops.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="1630" selection-start-line="1630" selection-end-line="1630" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/joint/singletask_jointly.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="159">
@@ -563,10 +684,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/joint/net.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="194" column="25" selection-start-line="194" selection-start-column="25" selection-end-line="194" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/tensorflow/python/client/session.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="1347" selection-start-line="1347" selection-end-line="1347" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/joint/job.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="32" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
+        <state relative-caret-position="255">
+          <caret line="17" column="81" selection-start-line="17" selection-start-column="81" selection-end-line="17" selection-end-column="81" />
         </state>
       </provider>
     </entry>
@@ -577,37 +712,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/joint/jointly.py">
+    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/tensorflow/python/framework/ops.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-418">
-          <caret line="628" column="67" selection-start-line="628" selection-start-column="67" selection-end-line="628" selection-end-column="67" />
-          <folding>
-            <element signature="e#1#10#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="212">
+          <caret line="458" selection-start-line="458" selection-end-line="458" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/tensorflow/python/client/session.py">
+    <entry file="file://$PROJECT_DIR$/joint/jointly.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="678" selection-start-line="678" selection-end-line="678" />
+        <state relative-caret-position="174">
+          <caret line="714" column="129" selection-start-line="714" selection-start-column="129" selection-end-line="714" selection-end-column="129" />
+          <folding>
+            <element signature="e#1#10#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/joint/jointlysingle.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="664" column="13" selection-start-line="664" selection-start-column="13" selection-end-line="664" selection-end-column="13" />
+        <state relative-caret-position="135">
+          <caret line="720" column="40" selection-start-line="720" selection-start-column="40" selection-end-line="720" selection-end-column="40" />
           <folding>
             <element signature="e#1#10#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/joint/net.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="149" column="75" selection-start-line="149" selection-start-column="75" selection-end-line="149" selection-end-column="75" />
         </state>
       </provider>
     </entry>
