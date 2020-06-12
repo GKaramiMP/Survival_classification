@@ -709,7 +709,10 @@ def train_model():
 
     with tf.variable_scope('loss'):
         cross_entropy = -tf.reduce_mean(labels_grad * tf.log(output_grad)) \
-                        - tf.reduce_mean(labels_survival * tf.log(output_survival))
+                        - tf.reduce_mean(labels_survival * tf.log(output_survival))\
+                        +labels_grad+output_grad-2*labels_grad*output_grad\
+                        +labels_survival+output_survival-2*labels_survival*output_survival\
+
     tf.summary.scalar("cross_entropy", cross_entropy)
 
     extra_update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
