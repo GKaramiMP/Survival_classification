@@ -1,5 +1,5 @@
 import os
 
 
-cmd='sbatch /exports/lkeb-hpc/gkarami/Code/age_gender_classification-master/joint/job.sh'
+cmd='sbatch /exports/lkeb-hpc/gkarami/Code/survival_classification/joint/job.sh'
 os.system(cmd)

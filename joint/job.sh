@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=Job012_goli
-#SBATCH --output=/exports/lkeb-hpc/gkarami/Code/Jobs/5_output_jointly.txt
+#SBATCH --output=/exports/lkeb-hpc/gkarami/Code/Jobs/7_output_jointly.txt
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem-per-cpu=5200
@@ -15,7 +15,7 @@ echo "on GPU      = $CUDA_VISIBLE_DEVICES"
 echo
 echo "@ $(date)"
 echo
-python /exports/lkeb-hpc/gkarami/Code/age_gender_classification-master/joint/jointly.py --where_to_run Cluster
+python /exports/lkeb-hpc/gkarami/Code/survival_classification/joint/jointlysingle.py --where_to_run Cluster
 
 
 #comment:

@@ -56,84 +56,145 @@ class Network(object):
 
 
     def _build_net(self,input,is_training):
+
+
         with tf.variable_scope('conv1'):
-            conv = tf.layers.conv3d(input,
-                                     filters=8,
-                                     kernel_size=3,
+            conv1 = tf.layers.conv3d(input,
+                                     filters=4,
+                                     kernel_size=5,
+                                     strides=1,
                                      padding='same',
                                      activation=None,
+                                     # bias_initializer=Constant(value=-0.9),
                                      dilation_rate=1,
                                      )
-            bn = tf.layers.batch_normalization(conv, training=is_training, renorm=False)
-            bn = tf.nn.leaky_relu(bn)
-            pool1 = tf.layers.max_pooling3d(inputs=bn, pool_size=2, strides=2)
+            bn1 = tf.layers.batch_normalization(conv1, training=is_training, renorm=False)
+            bn11 = tf.nn.leaky_relu(bn1)
+            drop1 = tf.nn.dropout(bn11, 0.6)
+            # pool1 = tf.layers.max_pooling3d(inputs=drop1, pool_size=(1, 3, 3), strides=(1, 2, 2))
+            # drop11 = tf.nn.dropout(pool1, 0.5)
+
         with tf.variable_scope('conv2'):
-            conv = tf.layers.conv3d(pool1,
-                                     filters=16,
-                                     kernel_size=3,
+            conv2 = tf.layers.conv3d(drop1,
+                                     filters=8,
+                                     kernel_size=5,
+                                     strides=1,
                                      padding='same',
                                      activation=None,
                                      dilation_rate=1,
                                      )
-            bn = tf.layers.batch_normalization(conv, training=is_training, renorm=False)
-            bn1 = tf.nn.leaky_relu(bn)
-            # pool1 = tf.layers.max_pooling3d(inputs=bn1, pool_size=2, strides=2)
+            bn2= tf.layers.batch_normalization(conv2, training=is_training, renorm=False)
+            bn22 = tf.nn.leaky_relu(bn2)
+            drop2 = tf.nn.dropout(bn22, 0.6)
+            # pool2 = tf.layers.max_pooling3d(inputs=bn22, pool_size=(2, 3, 3), strides=(1, 2, 2))
+            # drop22 = tf.nn.dropout(pool2, 0.6)
 
         with tf.variable_scope('conv3'):
-            conv = tf.layers.conv3d(bn1,
-                                     filters=16,
-                                     kernel_size=3,
+            conv3 = tf.layers.conv3d(drop2,
+                                     filters=8,
+                                     kernel_size=5,
+                                     strides=1,
                                      padding='same',
                                      activation=None,
                                      dilation_rate=1,
                                      )
-            bn = tf.layers.batch_normalization(conv, training=is_training, renorm=False)
-            bn = tf.nn.leaky_relu(bn)
-            pool2 = tf.layers.max_pooling3d(inputs=bn, pool_size=2, strides=2)
-        with tf.variable_scope('conv4'):
-            conv = tf.layers.conv3d(pool2,
-                                     filters=32,
-                                     kernel_size=3,
-                                     padding='same',
-                                     activation=None,
-                                     dilation_rate=1,
-                                     )
-            bn = tf.layers.batch_normalization(conv, training=is_training, renorm=False)
-            bn3 = tf.nn.leaky_relu(bn)
-            # pool3 = tf.layers.max_pooling3d(inputs=bn3, pool_size=2, strides=2)
+            bn3 = tf.layers.batch_normalization(conv3, training=is_training, renorm=False)
+            bn33 = tf.nn.leaky_relu(bn3)
+            # drop3 = tf.nn.dropout(bn33, 0.6)
+            pool3 = tf.layers.max_pooling3d(inputs=bn33, pool_size=(2, 2, 2), strides=(1, 2, 2))
+            drop33 = tf.nn.dropout(pool3, 0.5)
 
+        with tf.variable_scope('conv4'):
+            conv4 = tf.layers.conv3d(drop33,
+                                     filters=16,
+                                     kernel_size=5,
+                                     strides = 1,
+                                     padding='same',
+                                     activation=None,
+                                     dilation_rate=1,
+                                     )
+            bn4 = tf.layers.batch_normalization(conv4, training=is_training, renorm=False)
+            bn44 = tf.nn.leaky_relu(bn4)
+            drop4 = tf.nn.dropout(bn44, 0.6)
+            # pool4 = tf.layers.max_pooling3d(inputs=bn44, pool_size=(2, 3, 3), strides=(1, 2, 2))
+            # drop44 = tf.nn.dropout(pool4, 0.5)
 
         with tf.variable_scope('conv5'):
-            conv = tf.layers.conv3d(bn3,
-                                     filters=64,
-                                     kernel_size=3,
+            conv5 = tf.layers.conv3d(drop4,
+                                     filters=16,
+                                     kernel_size=5,
+                                     strides = 1,
                                      padding='same',
                                      activation=None,
                                      dilation_rate=1,
                                      )
-            bn = tf.layers.batch_normalization(conv, training=is_training, renorm=False)
-            bn5 = tf.nn.leaky_relu(bn)
+            bn5 = tf.layers.batch_normalization(conv5, training=is_training, renorm=False)
+            bn55 = tf.nn.leaky_relu(bn5)
+            # drop5 = tf.nn.dropout(bn55, 0.5)
+            pool5 = tf.layers.max_pooling3d(inputs=bn55, pool_size=(2, 2, 2), strides=(1, 2, 2))
+            drop55 = tf.nn.dropout(pool5, 0.6)
+
+        with tf.variable_scope('conv6'):
+            conv6 = tf.layers.conv3d(drop55,
+                                     filters=24,
+                                     kernel_size=5,
+                                     strides=1,
+                                     padding='same',
+                                     activation=None,
+                                     # bias_initializer=Constant(value=-0.9),
+                                     dilation_rate=1,
+                                     )
+            bn6 = tf.layers.batch_normalization(conv6, training=is_training, renorm=False)
+            bn66 = tf.nn.leaky_relu(bn6)
+            # drop6 = tf.nn.dropout(bn66, 0.6)
+            pool6 = tf.layers.max_pooling3d(inputs=bn66, pool_size=(1, 2, 2), strides=(1, 2, 2))
+            drop66 = tf.nn.dropout(pool6, 0.5)
+
+        with tf.variable_scope('conv7'):
+            conv7 = tf.layers.conv3d(drop66,
+                                     filters=32,
+                                     kernel_size=5,
+                                     strides=1,
+                                     padding='same',
+                                     activation=None,
+                                     dilation_rate=1,
+                                     )
+            bn7= tf.layers.batch_normalization(conv7, training=is_training, renorm=False)
+            bn77 = tf.nn.leaky_relu(bn7)
+            drop7 = tf.nn.dropout(bn77, 0.6)
+        #     pool7 = tf.layers.max_pooling3d(inputs=bn77, pool_size=(1, 2, 2), strides=(1, 1, 1))
+        #     drop77 = tf.nn.dropout(pool7, 0.6)
+
+
 
         with tf.variable_scope('fc1'):
-            flat_inputs = tf.layers.flatten(bn5)
-            nn = tf.layers.dense(flat_inputs, 512 ,activation=tf.nn.leaky_relu)
+            flat_input = tf.layers.flatten(drop7)
+            fc1 = tf.layers.dense(flat_input, 1024 ,activation=tf.nn.leaky_relu)
+            drop1 = tf.nn.dropout(fc1, 0.6)
 
-        with tf.variable_scope('fc2'):   # for grad
-            fc2 = tf.layers.dense(nn, 64, activation=tf.nn.leaky_relu)
+            fc2 = tf.layers.dense(drop1, 512, activation=tf.nn.leaky_relu)
+            drop2 = tf.nn.dropout(fc2, 0.6)
 
-        with tf.variable_scope('fc3'):  # for survival
-            fc3 = tf.layers.dense(nn, 64, activation=tf.nn.leaky_relu)
+            fc3 = tf.layers.dense(drop2, 256, activation=tf.nn.leaky_relu)
+            drop3 = tf.nn.dropout(fc3, 0.6)
 
-        with tf.variable_scope('fc22'):  # out  grad
-            fc22 = tf.layers.dense(fc2, 2, activation=tf.nn.leaky_relu)
-            out_grad = tf.nn.softmax(fc22)
+            fc4 = tf.layers.dense(drop3, 128, activation=tf.nn.leaky_relu)
+            drop4 = tf.nn.dropout(fc4, 0.6)
 
-        with tf.variable_scope('fc33'):  # out survival
-            fc33 = tf.layers.dense(fc3, 3, activation=tf.nn.leaky_relu)
-            out_survival = tf.nn.softmax(fc33)
+            fc5 = tf.layers.dense(drop4, 64, activation=tf.nn.leaky_relu)
+            drop5 = tf.nn.dropout(fc5, 0.6)
 
-            return out_grad, out_survival
+        with tf.variable_scope('fcg'):  # out  grad
+            fcg = tf.layers.dense(drop5, 2, activation=tf.nn.leaky_relu)
+            out_grad = tf.nn.softmax(fcg)
 
-            # return tf.nn.softmax(nn)
+        # with tf.variable_scope('fcc'):  # out survival
+        #     fcs = tf.layers.dense(drop5, 3, activation=tf.nn.leaky_relu)
+        #     out_survival = tf.nn.softmax(fcs)
+
+        return out_grad #, out_survival
+
+
+
 
 

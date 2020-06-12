@@ -583,7 +583,7 @@ def train_model():
     # Concat_Train_CBV = np.concatenate((Resized_Train_CBV, Rot_90_Train_CBV, Rot_lr_Train_CBV, Rot_ud_Train_CBV), axis=0)
     # Concat_Train_MD = np.concatenate((Resized_Train_MD, Rot_90_Train_MD, Rot_lr_Train_MD, Rot_ud_Train_MD), axis=0)
 
-#===================================normalization
+#====normalization
     # max_T1 = Concat_Train_T1.max()
     # max_CBV = Concat_Train_CBV.max()
     # max_MD = Concat_Train_MD.max()
@@ -610,8 +610,8 @@ def train_model():
 
     # valid_dataset = np.stack((Concat_Valid_T1_norm, Concat_Valid_MD_norm, Concat_Valid_CBV_norm), axis=3)  # axis=0:channel first, axis=1:channel last
     valid_T1_norm = tf.keras.utils.normalize(Concat_Valid_T1, axis=1)
-    valid_dataset = valid_T1_norm
-    valid_dataset = valid_dataset.reshape(64, 5, 64, 64, 1)
+    # valid_dataset = valid_T1_norm
+    valid_dataset = valid_T1_norm .reshape(64, 5, 64, 64, 1)
 
 #============== test
     Concat_Test_T1 = np.concatenate((Resized_Test_T1, Rot_90_Test_T1, Rot_lr_Test_T1, Rot_ud_Test_T1), axis=0)
@@ -628,8 +628,8 @@ def train_model():
     #
     # test_dataset = np.stack((Concat_Test_T1_norm, Concat_Test_CBV_norm, Concat_Test_MD_norm), axis=-1)
     test_T1_norm = tf.keras.utils.normalize(Concat_Test_T1, axis=1)
-    test_dataset = test_T1_norm
-    test_dataset = test_dataset.reshape(56, 5, 64, 64, 1)
+    # test_dataset = test_T1_norm
+    test_dataset = test_T1_norm .reshape(56, 5, 64, 64, 1)
  #==========================================================================================================shuffle data
     # def shuffle_lists(t1, md, cbv, y_survival_cat, y_grad_cat):
     #     index_shuf = list(range(1400))
@@ -662,12 +662,12 @@ def train_model():
     #train_dataset = train_dataset.astype('float32') / 255.
     # train_dataset = tf.keras.utils.normalize(train_dataset, axis=1)
 #==================================================================================
-    logno =5
+    logno =10
     length = 64
     channel = 1
     volume = 5
-    batch_size = 64
-    learning_rate = 0.0001
+    batch_size = 5
+    learning_rate = 0.000001
     n_output_survival = 3
     n_output_grad = 2
     total_size = train_dataset.shape[0]
@@ -701,7 +701,9 @@ def train_model():
 
     accuracy_grad = accuracy(output_grad, labels_grad)
     # accuracy_survival = accuracy(output_survival, labels_survival)
-
+    # age_nb_true_pred = 0
+    # age_nb_true_pred += self.sess.run(self.age_true_pred, feed_dict)
+    # age_train_acc = age_nb_true_pred * 1.0 / age_nb_train#############################
 
     tf.summary.scalar("accuracy_grade", accuracy_grad)
     # tf.summary.scalar("accuracy_survival", accuracy_survival)
@@ -713,7 +715,7 @@ def train_model():
 
 
     saver = tf.train.Saver(tf.global_variables(), max_to_keep=1000)
-    epoch = 10000
+    epoch = 15000
 
     with tf.variable_scope('loss'):
         # cross_entropy = -tf.reduce_mean(labels_grad * tf.log(output_grad))\
@@ -726,7 +728,8 @@ def train_model():
 
     extra_update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
     with tf.control_dependencies(extra_update_ops):
-        train_op = tf.train.MomentumOptimizer(learning_rate, 0.9).minimize(cross_entropy)
+        # train_op = tf.train.MomentumOptimizer(learning_rate, 0.9).minimize(cross_entropy)
+        train_op = tf.train.AdamOptimizer(learning_rate=1e-6).minimize(cross_entropy)  # , global_step=global_step)   , beta1=0.9, beta2=0.999,
     summ = tf.summary.merge_all()
     sess.run(tf.global_variables_initializer())
 
@@ -746,10 +749,7 @@ def train_model():
     train_writer = tf.summary.FileWriter((dir_path) + '/train/', graph=tf.get_default_graph())
     validation_writer = tf.summary.FileWriter((dir_path) + '/validation/', graph=sess.graph)
     test_writer = tf.summary.FileWriter((dir_path) + '/test', graph=sess.graph)
-    accu_rate_survival_tr=0
-    accu_rate_survival_vl=0
-    accu_rate_grad_tr=0
-    accu_rate_grad_vl=0
+
     point=0
     for e in range(epoch):
         print("-------------------------------")
@@ -779,6 +779,8 @@ def train_model():
 
             # print('******Train, step: %d , loss: %f, ,acc_g :%f, acc_s:%f *******' % ( point, cost,acc_g,acc_s))
             print('******Train, step: %d , loss: %f, , acc_g:%f *******' % (point, cost, acc_g))
+            print(pred_grad, batch_y_grad)
+
 
             train_writer.add_summary(sum_train, point)
 
@@ -803,7 +805,7 @@ def train_model():
 
             # print('******Validation, step: %d , loss: %f,acc_g :%f, acc_s:%f*******' % (point, cost_vl,acc_g,acc_s))
             print('******Validation, step: %d , loss: %f, acc_g:%f*******' % (point, cost_vl, acc_g))
-
+            # print(output_grad, labels_grad)
 
             # cost_vl, rs,pred_grad,pred_survival,acc_g,acc_s  = sess.run( [cross_entropy, summ,output_grad,output_survival,accuracy_grade,accuracy_survival],
             cost_vl, rs, pred_grad, acc_g  = sess.run( [cross_entropy, summ, output_grad, accuracy_grad],
@@ -819,7 +821,7 @@ def train_model():
                 train_writer.flush()
                 test_writer.flush()
             print('******Test, step: %d , loss: %f, acc_g:%f*******' % (point, cost_vl, acc_g))
-
+            print(output_grad, labels_grad)
 
             if i%50==0:
                 # saver = tf.train.Saver()
