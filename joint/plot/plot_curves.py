@@ -59,7 +59,7 @@ if __name__=='__main__':
                             accuracy_survival_ts.append(v.simple_value)
                         elif v.tag == tag_list[1]:
                             cross_entropy_ts.append(v.simple_value)
-    end_lim=-1
+    end_lim=130000
     rng=list(range(0,  len(accuracy_survival[:end_lim])))
     # rng_vl=list(range(0, 125 * len(loss_vl), 125))
     # 8cffdb,137e6d
@@ -75,7 +75,7 @@ if __name__=='__main__':
     # plt.plot(rng, smooth_curve(cross_entropy_ts[:end_lim], 20), c='#916e99', label='test')
     plt.ylabel('Loss function')
     plt.xlabel('Time point')
-    plt.xlim([0, 150000])
+    plt.xlim([0, end_lim])
     ax2.legend()
 
     ax1 = fig.add_subplot(gs[0, 1])  # First row, first column
@@ -85,7 +85,7 @@ if __name__=='__main__':
     # plt.plot(rng, smooth_curve(accuracy_survival_ts[:end_lim], 20), c='#916e99', label='test')
     plt.ylabel('Accuracy')
     plt.xlabel('Time point')
-    plt.xlim([0,150000])
+    plt.xlim([0,end_lim])
     ax1.legend()
 
 
