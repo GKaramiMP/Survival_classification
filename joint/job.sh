@@ -1,13 +1,13 @@
 #!/bin/bash
 #SBATCH --job-name=Job012_goli
-#SBATCH --output=/exports/lkeb-hpc/gkarami/Code/Jobs/13_output_jointly.txt
+#SBATCH --output=/exports/lkeb-hpc/gkarami/Code/Jobs/output_att_joint_sur_31.txt
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem-per-cpu=5200
-#SBATCH --partition=gpu
+#SBATCH --partition=LKEBgpu
 #SBATCH --gres=gpu:1
 #SBATCH --time=0
-#SBATCH --nodelist=res-hpc-gpu01
+#SBATCH --nodelist=res-hpc-lkeb04
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/exports/lkeb-hpc/gkarami/Program/cuda/cuda/lib64/
 source /exports/lkeb-hpc/gkarami/Program/TF112/bin/activate
 echo "on Hostname = $(hostname)"

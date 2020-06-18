@@ -5,6 +5,7 @@ from skimage.io import imread
 from skimage.transform import resize
 import glob
 import tensorflow as tf
+# from keras import Input
 # from keras.losses import binary_crossentropy
 import sys
 import pickle
@@ -14,7 +15,7 @@ from joint.net import Network
 from random import shuffle
 
 import matplotlib
-matplotlib.use('pdf')
+# matplotlib.use('pdf')
 import matplotlib.pyplot as plt
 from shutil import copyfile
 
@@ -45,66 +46,66 @@ def accuracy(predictions, labels):
 def train_model():
     # ==================================================== train
 
-    train_path_T1 = '/exports/lkeb-hpc/gkarami/Data/3_Train_T1_hg/'
-    train_path_MD = '/exports/lkeb-hpc/gkarami/Data/3_Train_MD_hg/'
-    train_path_CBV = '/exports/lkeb-hpc/gkarami/Data/3_Train_CBV_hg/'
-    train_path_mask = '/exports/lkeb-hpc/gkarami/Data/3_Train_T1_hg/'
+    train_path_T1 = '/exports/lkeb-hpc/gkarami/Data/6_Train_T1/'
+    # train_path_MD = '/exports/lkeb-hpc/gkarami/Data/6_Train_MD/'
+    # train_path_CBV = '/exports/lkeb-hpc/gkarami/Data/6_Train_CBV/'
+    train_path_mask = '/exports/lkeb-hpc/gkarami/Data/6_Train_T1/'
 
     train_dataset_T1_1= sorted(next(os.walk(train_path_T1))[2])
-    train_dataset_MD_1 = sorted(next(os.walk(train_path_MD))[2])
-    train_dataset_CBV_1= sorted(next(os.walk(train_path_CBV))[2])
+    # train_dataset_MD_1 = sorted(next(os.walk(train_path_MD))[2])
+    # train_dataset_CBV_1= sorted(next(os.walk(train_path_CBV))[2])
 
 
     train_dataset_T1 = np.zeros((len(train_dataset_T1_1), 128, 128), dtype=np.float)
-    train_dataset_MD = np.zeros((len(train_dataset_MD_1), 128, 128), dtype=np.float)
-    train_dataset_CBV = np.zeros((len(train_dataset_CBV_1), 128, 128), dtype=np.float)
+    # train_dataset_MD = np.zeros((len(train_dataset_MD_1), 128, 128), dtype=np.float)
+    # train_dataset_CBV = np.zeros((len(train_dataset_CBV_1), 128, 128), dtype=np.float)
 
     Resized_Train_T1 = np.zeros((len(train_dataset_T1_1), 64, 64), dtype=np.float)
-    Resized_Train_MD = np.zeros((len(train_dataset_MD_1), 64, 64), dtype=np.float)
-    Resized_Train_CBV = np.zeros((len(train_dataset_CBV_1), 64, 64), dtype=np.float)
+    # Resized_Train_MD = np.zeros((len(train_dataset_MD_1), 64, 64), dtype=np.float)
+    # Resized_Train_CBV = np.zeros((len(train_dataset_CBV_1), 64, 64), dtype=np.float)
     Resized_Train_Masks = np.zeros((len(train_dataset_T1_1), 64, 64, 1), dtype=np.bool)
-    print(train_dataset_T1_1)
+
     #======================================================================valid
-    valid_path_T1 = '/exports/lkeb-hpc/gkarami/Data/3_Validation_T1_hg/'
-    valid_path_MD = '/exports/lkeb-hpc/gkarami/Data/3_Validation_MD_hg/'
-    valid_path_CBV = '/exports/lkeb-hpc/gkarami/Data/3_Validation_CBV_hg/'
-    valid_path_mask = '/exports/lkeb-hpc/gkarami/Data/3_Validation_T1_hg/'
+    valid_path_T1 = '/exports/lkeb-hpc/gkarami/Data/6_Validation_T1/'
+    # valid_path_MD = '/exports/lkeb-hpc/gkarami/Data/6_Validation_MD/'
+    # valid_path_CBV = '/exports/lkeb-hpc/gkarami/Data/6_Validation_CBV/'
+    valid_path_mask = '/exports/lkeb-hpc/gkarami/Data/6_Validation_T1/'
 
     valid_dataset_T1_1 = sorted(next(os.walk(valid_path_T1))[2])
-    valid_dataset_MD_1 = sorted(next(os.walk(valid_path_MD))[2])
-    valid_dataset_CBV_1 = sorted(next(os.walk(valid_path_CBV))[2])
+    # valid_dataset_MD_1 = sorted(next(os.walk(valid_path_MD))[2])
+    # valid_dataset_CBV_1 = sorted(next(os.walk(valid_path_CBV))[2])
 
     valid_dataset_T1 = np.zeros((len(valid_dataset_T1_1), 128, 128), dtype=np.float)
-    valid_dataset_MD = np.zeros((len(valid_dataset_MD_1), 128, 128), dtype=np.float)
-    valid_dataset_CBV = np.zeros((len(valid_dataset_CBV_1), 128, 128), dtype=np.float)
+    # valid_dataset_MD = np.zeros((len(valid_dataset_MD_1), 128, 128), dtype=np.float)
+    # valid_dataset_CBV = np.zeros((len(valid_dataset_CBV_1), 128, 128), dtype=np.float)
     valid_dataset_masks = np.zeros((len(valid_dataset_T1_1), 128, 128), dtype=np.bool)
 
     Resized_Valid_T1 = np.zeros((len(valid_dataset_T1_1), 64, 64), dtype=np.float)
-    Resized_Valid_MD = np.zeros((len(valid_dataset_MD_1), 64, 64), dtype=np.float)
-    Resized_Valid_CBV = np.zeros((len(valid_dataset_CBV_1), 64, 64), dtype=np.float)
+    # Resized_Valid_MD = np.zeros((len(valid_dataset_MD_1), 64, 64), dtype=np.float)
+    # Resized_Valid_CBV = np.zeros((len(valid_dataset_CBV_1), 64, 64), dtype=np.float)
     Resized_Valid_Masks = np.zeros((len(valid_dataset_T1_1), 64, 64, 1), dtype=np.bool)
-    print(valid_dataset_T1_1)
+
 
     #======================================================================test
-    test_path_T1 = '/exports/lkeb-hpc/gkarami/Data/3_Test_T1_hg/'
-    test_path_MD = '/exports/lkeb-hpc/gkarami/Data/3_Test_MD_hg/'
-    test_path_CBV = '/exports/lkeb-hpc/gkarami/Data/3_Test_CBV_hg/'
-    test_path_mask = '/exports/lkeb-hpc/gkarami/Data/3_Test_T1_hg/'
+    test_path_T1 = '/exports/lkeb-hpc/gkarami/Data/6_Test_T1/'
+    # test_path_MD = '/exports/lkeb-hpc/gkarami/Data/6_Test_MD/'
+    # test_path_CBV = '/exports/lkeb-hpc/gkarami/Data/6_Test_CBV/'
+    test_path_mask = '/exports/lkeb-hpc/gkarami/Data/6_Test_T1/'
 
     test_dataset_T1_1 = sorted(next(os.walk(test_path_T1))[2])
-    test_dataset_MD_1 = sorted(next(os.walk(test_path_MD))[2])
-    test_dataset_CBV_1 = sorted(next(os.walk(test_path_CBV))[2])
+    # test_dataset_MD_1 = sorted(next(os.walk(test_path_MD))[2])
+    # test_dataset_CBV_1 = sorted(next(os.walk(test_path_CBV))[2])
 
     test_dataset_T1 = np.zeros((len(test_dataset_T1_1), 128, 128), dtype=np.float)
-    test_dataset_MD = np.zeros((len(test_dataset_MD_1), 128, 128), dtype=np.float)
-    test_dataset_CBV = np.zeros((len(test_dataset_CBV_1), 128, 128), dtype=np.float)
+    # test_dataset_MD = np.zeros((len(test_dataset_MD_1), 128, 128), dtype=np.float)
+    # test_dataset_CBV = np.zeros((len(test_dataset_CBV_1), 128, 128), dtype=np.float)
     test_dataset_masks = np.zeros((len(test_dataset_T1_1), 128, 128), dtype=np.bool)
 
     Resized_Test_T1 = np.zeros((len(test_dataset_T1_1), 64, 64), dtype=np.float)
-    Resized_Test_MD = np.zeros((len(test_dataset_MD_1), 64, 64), dtype=np.float)
-    Resized_Test_CBV = np.zeros((len(test_dataset_CBV_1), 64, 64), dtype=np.float)
+    # Resized_Test_MD = np.zeros((len(test_dataset_MD_1), 64, 64), dtype=np.float)
+    # Resized_Test_CBV = np.zeros((len(test_dataset_CBV_1), 64, 64), dtype=np.float)
     Resized_Test_Masks = np.zeros((len(test_dataset_T1_1), 64, 64, 1), dtype=np.bool)
-    print(test_dataset_T1_1)
+
     # =====================================================================================T1 train
     n = 0
     for mask_path in glob.glob('{}/*.tif'.format(train_path_mask)):
@@ -192,7 +193,7 @@ def train_model():
     #     Rot_90_Train_CBV[m] = np.rot90(img)
     #     Rot_lr_Train_CBV[m] = np.fliplr(img)
     #     Rot_ud_Train_CBV[m] = np.flipud(img)
-    # # ============================================================ MD  Train
+    # # # ============================================================ MD  Train
     # n = 0
     # for mask_path in glob.glob('{}/*.tif'.format(train_path_mask)):
     #     base = os.path.basename(mask_path)
@@ -498,85 +499,159 @@ def train_model():
 #         Rot_lr_Test_MD[m] = np.fliplr(img)
 #         Rot_ud_Test_MD[m] = np.flipud(img)
  # ============================================================================================================folder 6_train
-    # 02,05,08,09,10,11,12,13, 14,15,16,18,                                                                                                                    19,20,21,22,23,24,25,26,27,28,30,                                                                                                                      31,32 ,34,35,38,40,41,43,46,47,48,
-    #
-    # train_survival_labels = np.mat(
-    #     ("1; 1; 1;      2; 2; 2;    1; 1; 1; 1;    2;   2; 2; 2;        0; 0; 0;    1;      1; 1;        2; 2;      0; 0; 0;        0; 0; 0;       1; 1; 1;     1; 1; 1;    0; 0;    2; 2;   1; 1; 1;    0; 0; 0; 0;     2; 2; 2; 2;     0; 0; 0; 0; 0; 0; 0;        2; 2; 2; 2; 2;     0; 0; 0;     2;   1; 1; 1;    1; 1; 1; 1; 1;        1; 1;       2; 2; 2;      1;      1; 1; 1;    1;     1; 1; 1; 1; 1; 1;           1; 1; 1; 1;         2; 2;          0;   0;"
-    #      "1; 1; 1;      2; 2; 2;    1; 1; 1; 1;    2;   2; 2; 2;        0; 0; 0;    1;      1; 1;        2; 2;      0; 0; 0;        0; 0; 0;       1; 1; 1;     1; 1; 1;    0; 0;    2; 2;   1; 1; 1;    0; 0; 0; 0;     2; 2; 2; 2;     0; 0; 0; 0; 0; 0; 0;        2; 2; 2; 2; 2;     0; 0; 0;     2;   1; 1; 1;    1; 1; 1; 1; 1;        1; 1;       2; 2; 2;      1;      1; 1; 1;    1;     1; 1; 1; 1; 1; 1;           1; 1; 1; 1;         2; 2;          0;   0;"
-    #      "1; 1; 1;      2; 2; 2;    1; 1; 1; 1;    2;   2; 2; 2;        0; 0; 0;    1;      1; 1;        2; 2;      0; 0; 0;        0; 0; 0;       1; 1; 1;     1; 1; 1;    0; 0;    2; 2;   1; 1; 1;    0; 0; 0; 0;     2; 2; 2; 2;     0; 0; 0; 0; 0; 0; 0;        2; 2; 2; 2; 2;     0; 0; 0;     2;   1; 1; 1;    1; 1; 1; 1; 1;        1; 1;       2; 2; 2;      1;      1; 1; 1;    1;     1; 1; 1; 1; 1; 1;           1; 1; 1; 1;         2; 2;          0;   0;"
-    #      "1; 1; 1;      2; 2; 2;    1; 1; 1; 1;    2;   2; 2; 2;        0; 0; 0;    1;      1; 1;        2; 2;      0; 0; 0;        0; 0; 0;       1; 1; 1;     1; 1; 1;    0; 0;    2; 2;   1; 1; 1;    0; 0; 0; 0;     2; 2; 2; 2;     0; 0; 0; 0; 0; 0; 0;        2; 2; 2; 2; 2;     0; 0; 0;     2;   1; 1; 1;    1; 1; 1; 1; 1;        1; 1;       2; 2; 2;      1;      1; 1; 1;    1;     1; 1; 1; 1; 1; 1;           1; 1; 1; 1;         2; 2;          0;   0 " ),
+    print(train_dataset_T1_1)
+    print(valid_dataset_T1_1)
+    print(test_dataset_T1_1)
+    # 02,08,09,10,12,13, 14,15,18,                                                                                                          19,20,21,22,24,25,26,27,28,30,                                                                                                                     31,32 ,34,35,38,40,41,43,47,48,
+
+    train_survival = np.mat(( "0; 0; 0;       0; 0; 0; 0;    1;   1; 1; 1;      1;   0; 0;         0; 0; 0;     1; 1; 1;             0; 0; 0;    0; 0;    1; 1;   0; 0; 0;       1; 1; 1; 1;       0; 0; 0; 0; 0; 0; 0;          1; 1; 1; 1; 1;      0; 0; 0;     1;    0; 0; 0;         0; 0; 0; 0; 0;      0; 0;       1; 1; 1;     0;      0; 0; 0;    0;     1; 1; 1; 1; 1; 1;          0; 0; 0; 0;    0;   0;"
+                              "0; 0; 0;       0; 0; 0; 0;    1;   1; 1; 1;      1;   0; 0;         0; 0; 0;     1; 1; 1;             0; 0; 0;    0; 0;    1; 1;   0; 0; 0;       1; 1; 1; 1;       0; 0; 0; 0; 0; 0; 0;          1; 1; 1; 1; 1;      0; 0; 0;     1;    0; 0; 0;         0; 0; 0; 0; 0;      0; 0;       1; 1; 1;     0;      0; 0; 0;    0;     1; 1; 1; 1; 1; 1;          0; 0; 0; 0;    0;   0;"
+                              "0; 0; 0;       0; 0; 0; 0;    1;   1; 1; 1;      1;   0; 0;         0; 0; 0;     1; 1; 1;             0; 0; 0;    0; 0;    1; 1;   0; 0; 0;       1; 1; 1; 1;       0; 0; 0; 0; 0; 0; 0;          1; 1; 1; 1; 1;      0; 0; 0;     1;    0; 0; 0;         0; 0; 0; 0; 0;      0; 0;       1; 1; 1;     0;      0; 0; 0;    0;     1; 1; 1; 1; 1; 1;          0; 0; 0; 0;    0;   0;"
+                              "0; 0; 0;       0; 0; 0; 0;    1;   1; 1; 1;      1;   0; 0;         0; 0; 0;     1; 1; 1;             0; 0; 0;    0; 0;    1; 1;   0; 0; 0;       1; 1; 1; 1;       0; 0; 0; 0; 0; 0; 0;          1; 1; 1; 1; 1;      0; 0; 0;     1;    0; 0; 0;         0; 0; 0; 0; 0;      0; 0;       1; 1; 1;     0;      0; 0; 0;    0;     1; 1; 1; 1; 1; 1;          0; 0; 0; 0;    0;   0 "),
+        dtype=float)
+    # train_survival = np.mat(
+    #                        ("1; 1; 1;        1; 1; 1; 1;    2;   2; 2; 2;     1;   1; 1;         0; 0; 0;     1; 1; 1;             1; 1; 1;    0; 0;    2; 2;   1; 1; 1;          2; 2; 2; 2;     0; 0; 0; 0; 0; 0; 0;        2; 2; 2; 2; 2;     0; 0; 0;     2;   1; 1; 1;         1; 1; 1; 1; 1;        1; 1;       2; 2; 2;      1;      1; 1; 1;    1;     1; 1; 1; 1; 1; 1;           1; 1; 1; 1;    0;   0;"
+    #                         "1; 1; 1;        1; 1; 1; 1;    2;   2; 2; 2;     1;   1; 1;         0; 0; 0;     1; 1; 1;             1; 1; 1;    0; 0;    2; 2;   1; 1; 1;          2; 2; 2; 2;     0; 0; 0; 0; 0; 0; 0;        2; 2; 2; 2; 2;     0; 0; 0;     2;   1; 1; 1;         1; 1; 1; 1; 1;        1; 1;       2; 2; 2;      1;      1; 1; 1;    1;     1; 1; 1; 1; 1; 1;           1; 1; 1; 1;    0;   0;"
+    #                         "1; 1; 1;        1; 1; 1; 1;    2;   2; 2; 2;     1;   1; 1;         0; 0; 0;     1; 1; 1;             1; 1; 1;    0; 0;    2; 2;   1; 1; 1;          2; 2; 2; 2;     0; 0; 0; 0; 0; 0; 0;        2; 2; 2; 2; 2;     0; 0; 0;     2;   1; 1; 1;         1; 1; 1; 1; 1;        1; 1;       2; 2; 2;      1;      1; 1; 1;    1;     1; 1; 1; 1; 1; 1;           1; 1; 1; 1;    0;   0;"
+    #                         "1; 1; 1;        1; 1; 1; 1;    2;   2; 2; 2;     1;   1; 1;         0; 0; 0;     1; 1; 1;             1; 1; 1;    0; 0;    2; 2;   1; 1; 1;          2; 2; 2; 2;     0; 0; 0; 0; 0; 0; 0;        2; 2; 2; 2; 2;     0; 0; 0;     2;   1; 1; 1;         1; 1; 1; 1; 1;        1; 1;       2; 2; 2;      1;      1; 1; 1;    1;     1; 1; 1; 1; 1; 1;           1; 1; 1; 1;    0;   0 " ),
     #     dtype=float)
-    #
-    # train_grad_labels = np.mat(
-    #     ("1; 1; 1;      0; 0; 0;    0; 0; 0; 0;   0;   1; 1; 1;        1; 1; 1;    1;       1; 1;        0; 0;      0; 0; 0;        1; 1; 1;       0; 0; 0;      0; 0; 0;   1; 1;   1; 1;   1; 1; 1;    1; 1; 1; 1;      0; 0; 0; 0;     1; 1; 1; 1; 1; 1; 1;        0; 0; 0; 0; 0;     1; 1; 1;    0;   1; 1; 1;    1; 1; 1; 1; 1;        0; 0;       1; 1; 1;       1;      0; 0; 0;    1;     0; 0; 0; 0; 0; 0;          1; 1; 1; 1;         1; 1;            1;   1;"
-    #      "1; 1; 1;      0; 0; 0;    0; 0; 0; 0;   0;   1; 1; 1;        1; 1; 1;    1;       1; 1;        0; 0;      0; 0; 0;        1; 1; 1;       0; 0; 0;      0; 0; 0;   1; 1;   1; 1;   1; 1; 1;    1; 1; 1; 1;      0; 0; 0; 0;     1; 1; 1; 1; 1; 1; 1;        0; 0; 0; 0; 0;     1; 1; 1;    0;   1; 1; 1;    1; 1; 1; 1; 1;        0; 0;       1; 1; 1;       1;      0; 0; 0;    1;     0; 0; 0; 0; 0; 0;          1; 1; 1; 1;         1; 1;            1;   1;"
-    #      "1; 1; 1;      0; 0; 0;    0; 0; 0; 0;   0;   1; 1; 1;        1; 1; 1;    1;       1; 1;        0; 0;      0; 0; 0;        1; 1; 1;       0; 0; 0;      0; 0; 0;   1; 1;   1; 1;   1; 1; 1;    1; 1; 1; 1;      0; 0; 0; 0;     1; 1; 1; 1; 1; 1; 1;        0; 0; 0; 0; 0;     1; 1; 1;    0;   1; 1; 1;    1; 1; 1; 1; 1;        0; 0;       1; 1; 1;       1;      0; 0; 0;    1;     0; 0; 0; 0; 0; 0;          1; 1; 1; 1;         1; 1;            1;   1;"
-    #      "1; 1; 1;      0; 0; 0;    0; 0; 0; 0;   0;   1; 1; 1;        1; 1; 1;    1;       1; 1;        0; 0;      0; 0; 0;        1; 1; 1;       0; 0; 0;      0; 0; 0;   1; 1;   1; 1;   1; 1; 1;    1; 1; 1; 1;      0; 0; 0; 0;     1; 1; 1; 1; 1; 1; 1;        0; 0; 0; 0; 0;     1; 1; 1;    0;   1; 1; 1;    1; 1; 1; 1; 1;        0; 0;       1; 1; 1;       1;      0; 0; 0;    1;     0; 0; 0; 0; 0; 0;          1; 1; 1; 1;         1; 1;            1;   1 "),
-    #     dtype=float)
-    #
-    #
-    #         # (03, 04, 06, 17, 33, 44)
-    # valid_survival_labels = np.mat(
-    #     ("  1; 1; 1;   0; 0; 0; 0;      1; 1; 1;    2; 2; 2;     0; 0;    2;"
-    #      "  1; 1; 1;   0; 0; 0; 0;      1; 1; 1;    2; 2; 2;     0; 0;    2;"
-    #      "  1; 1; 1;   0; 0; 0; 0;      1; 1; 1;    2; 2; 2;     0; 0;    2;"
-    #      "  1; 1; 1;   0; 0; 0; 0;      1; 1; 1;    2; 2; 2;     0; 0;    2"),dtype=float)
-    #
-    # valid_grad_labels = np.mat(
-    #     ("  1; 1; 1;   1; 1; 1; 1;     1; 1; 1;     0; 0; 0;      0; 0;    0;"
-    #      "  1; 1; 1;   1; 1; 1; 1;     1; 1; 1;     0; 0; 0;      0; 0;    0;"
-    #      "  1; 1; 1;   1; 1; 1; 1;     1; 1; 1;     0; 0; 0;      0; 0;    0;"
-    #       " 1; 1; 1;   1; 1; 1; 1;     1; 1; 1;     0; 0; 0;      0; 0;    0"),dtype=float)
+
+    train_grad = np.mat(
+        ("1; 1; 1;      0; 0; 0; 0;     0;   1; 1; 1;       1;      1; 1;        0; 0;      0; 0; 0;     0; 0; 0;            0; 0; 0;   1; 1;   1; 1;   1; 1; 1;    1; 1; 1; 1;      0; 0; 0; 0;     1; 1; 1; 1; 1; 1; 1;        0; 0; 0; 0; 0;     1; 1; 1;    0;   1; 1; 1;           1; 1; 1; 1; 1;        0; 0;       1; 1; 1;       1;      0; 0; 0;    1;     0; 0; 0; 0; 0; 0;          1; 1; 1; 1;     1;   1;"
+         "1; 1; 1;      0; 0; 0; 0;     0;   1; 1; 1;       1;      1; 1;        0; 0;      0; 0; 0;     0; 0; 0;            0; 0; 0;   1; 1;   1; 1;   1; 1; 1;    1; 1; 1; 1;      0; 0; 0; 0;     1; 1; 1; 1; 1; 1; 1;        0; 0; 0; 0; 0;     1; 1; 1;    0;   1; 1; 1;           1; 1; 1; 1; 1;        0; 0;       1; 1; 1;       1;      0; 0; 0;    1;     0; 0; 0; 0; 0; 0;          1; 1; 1; 1;     1;   1;"
+         "1; 1; 1;      0; 0; 0; 0;     0;   1; 1; 1;       1;      1; 1;        0; 0;      0; 0; 0;     0; 0; 0;            0; 0; 0;   1; 1;   1; 1;   1; 1; 1;    1; 1; 1; 1;      0; 0; 0; 0;     1; 1; 1; 1; 1; 1; 1;        0; 0; 0; 0; 0;     1; 1; 1;    0;   1; 1; 1;           1; 1; 1; 1; 1;        0; 0;       1; 1; 1;       1;      0; 0; 0;    1;     0; 0; 0; 0; 0; 0;          1; 1; 1; 1;     1;   1;"
+         "1; 1; 1;      0; 0; 0; 0;     0;   1; 1; 1;       1;      1; 1;        0; 0;      0; 0; 0;     0; 0; 0;            0; 0; 0;   1; 1;   1; 1;   1; 1; 1;    1; 1; 1; 1;      0; 0; 0; 0;     1; 1; 1; 1; 1; 1; 1;        0; 0; 0; 0; 0;     1; 1; 1;    0;   1; 1; 1;           1; 1; 1; 1; 1;        0; 0;       1; 1; 1;       1;      0; 0; 0;    1;     0; 0; 0; 0; 0; 0;          1; 1; 1; 1;     1;   1 "),
+        dtype=float)
+
+
+    # (03, 04, 06, 17,23 )
+    valid_survival = np.mat(
+        ("  0; 0; 0;   0; 0; 0; 0;      1; 1; 1;    1; 1; 1;    0; 0; 0; 0; "
+         "  0; 0; 0;   0; 0; 0; 0;      1; 1; 1;    1; 1; 1;    0; 0; 0; 0; "
+         "  0; 0; 0;   0; 0; 0; 0;      1; 1; 1;    1; 1; 1;    0; 0; 0; 0; "
+         "  0; 0; 0;   0; 0; 0; 0;      1; 1; 1;    1; 1; 1;    0; 0; 0; 0 "), dtype=float)
+    # valid_survival = np.mat(
+    #     ("  1; 1; 1;   0; 0; 0; 0;      1; 1; 1;    2; 2; 2;     ;"
+    #      "  1; 1; 1;   0; 0; 0; 0;      1; 1; 1;    2; 2; 2;     ;"
+    #      "  1; 1; 1;   0; 0; 0; 0;      1; 1; 1;    2; 2; 2;     ;"
+    #      "  1; 1; 1;   0; 0; 0; 0;      1; 1; 1;    2; 2; 2;     "),dtype=float)
+
+    valid_grad = np.mat(
+        ("  1; 1; 1;   1; 1; 1; 1;     1; 1; 1;     0; 0; 0;      0; 0;    0;"
+         "  1; 1; 1;   1; 1; 1; 1;     1; 1; 1;     0; 0; 0;      0; 0;    0;"
+         "  1; 1; 1;   1; 1; 1; 1;     1; 1; 1;     0; 0; 0;      0; 0;    0;"
+          " 1; 1; 1;   1; 1; 1; 1;     1; 1; 1;     0; 0; 0;      0; 0;    0"),dtype=float)
+    # ( 11, 14, 16, 46)
+    test_survival = np.mat(
+        ("     0; 0; 0;    1; 1;    0; 0; 0;    1; 1; "
+         "     0; 0; 0;    1; 1;    0; 0; 0;    1; 1; "
+         "     0; 0; 0;    1; 1;    0; 0; 0;    1; 1; "
+         "     0; 0; 0;    1; 1;    0; 0; 0;    1; 1"), dtype=float)
+    # test_survival = np.mat(
+    #     ("  2; 2; 2;   0; 0; 0;       1; 1; 1;    2; 2; "
+    #      "  2; 2; 2;   0; 0; 0;       1; 1; 1;    2; 2; "
+    #      "  2; 2; 2;   0; 0; 0;       1; 1; 1;    2; 2; "
+    #      "  2; 2; 2;   0; 0; 0;       1; 1; 1;    2; 2"), dtype=float)
+
+    test_grad = np.mat(
+        (" 0; 0; 0;     1; 1; 1;      1; 1; 1;    1; 1; "
+         " 0; 0; 0;     1; 1; 1;      1; 1; 1;    1; 1; "
+         " 0; 0; 0;     1; 1; 1;      1; 1; 1;    1; 1; "
+          "0; 0; 0;     1; 1; 1;      1; 1; 1;    1; 1"), dtype=float)
 # ===================================================================================================== 3_data_hg
     #2, 3, 10, 20, 21, 22, 23, 27, 30, 35, 40
-    train_survival_labels = np.mat((    " 1; 1; 1;      1; 1; 1;   2; 2; 2;     0; 0; 0;    2; 2;       1; 1; 1;     0; 0; 0; 0;         0; 0; 0;    1; 1; 1;   1;    1; 1;"
-                                         "1; 1; 1; 1; 1; 1; 2; 2; 2; 0; 0; 0; 2; 2; 2; 2; 2; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1; 0; 1; 1;"
-                                         "1; 1; 1; 1; 1; 1; 2; 2; 2; 0; 0; 0; 2; 2; 2; 2; 2; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1; 0; 1; 1;"
-                                         "1; 1; 1; 1; 1; 1; 2; 2; 2; 0; 0; 0; 2; 2; 2; 2; 2; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1; 0; 1; 1,"),
-                                         dtype=float)
 
-    train_grad_labels = np.mat((
-                                        "1; 1; 1;       0; 0; 0;    0; 0; 0;    0; 0; 0;    1; 1;      1; 1; 1;        1; 1; 1; 1;      1; 1; 1;   1; 1; 1;    1;   1; 1;"
-                                        "1; 1; 1; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;"
-                                        "1; 1; 1; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;"
-                                        "1; 1; 1; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1"),
-                                        dtype=float)
-    # 4, 13, 17, 25, 46
-    valid_survival_labels = np.mat((
-                                        " 0; 0; 0; 0;       1; 1;    2; 2; 2;    0; 0; 0; 0; 0;     2; 2;"
-                                        " 0; 0; 0; 0; 1; 1; 2; 2; 2; 0; 0; 0; 0; 0; 2; 2;"
-                                        " 0; 0; 0; 0; 1; 1; 2; 2; 2; 0; 0; 0; 0; 0; 2; 2;"
-                                        " 0; 0; 0; 0; 1; 1; 2; 2; 2; 0; 0; 0; 0; 0; 2; 2"),
-                                        dtype=float)
-
-    valid_grad_labels = np.mat((
-                                       " 0; 0; 0; 0; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0; 0;"
-                                       " 0; 0; 0; 0; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0; 0;"
-                                       " 0; 0; 0; 0; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0; 0;"
-                                       " 0; 0; 0; 0; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0; 0"),
-                                   dtype=float)
+    # train_survival = np.mat((    " 1; 1; 1;      1; 1; 1;   2; 2; 2;     0; 0; 0;    2; 2;       1; 1; 1;     0; 0; 0; 0;         0; 0; 0;    1; 1; 1;   1;    1; 1;"
+    #                                      "1; 1; 1; 1; 1; 1; 2; 2; 2; 0; 0; 0; 2; 2; 2; 2; 2; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1; 0; 1; 1;"
+    #                                      "1; 1; 1; 1; 1; 1; 2; 2; 2; 0; 0; 0; 2; 2; 2; 2; 2; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1; 0; 1; 1;"
+    #                                      "1; 1; 1; 1; 1; 1; 2; 2; 2; 0; 0; 0; 2; 2; 2; 2; 2; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1; 0; 1; 1,"),
+    #                                      dtype=float)
+    #
+    # train_grad = np.mat((
+    #                                     "1; 1; 1;       0; 0; 0;    0; 0; 0;    0; 0; 0;    1; 1;      1; 1; 1;        1; 1; 1; 1;      1; 1; 1;   1; 1; 1;    1;   1; 1;"
+    #                                     "1; 1; 1; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;"
+    #                                     "1; 1; 1; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;"
+    #                                     "1; 1; 1; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1"),
+    #                                     dtype=float)
+    # # 4, 13, 17, 25, 46
+    # valid_survival = np.mat((
+    #                                     " 0; 0; 0; 0;       1; 1;    2; 2; 2;    0; 0; 0; 0; 0;     2; 2;"
+    #                                     " 0; 0; 0; 0; 1; 1; 2; 2; 2; 0; 0; 0; 0; 0; 2; 2;"
+    #                                     " 0; 0; 0; 0; 1; 1; 2; 2; 2; 0; 0; 0; 0; 0; 2; 2;"
+    #                                     " 0; 0; 0; 0; 1; 1; 2; 2; 2; 0; 0; 0; 0; 0; 2; 2"),
+    #                                     dtype=float)
+    #
+    # valid_grad = np.mat((
+    #                                    " 0; 0; 0; 0; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0; 0;"
+    #                                    " 0; 0; 0; 0; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0; 0;"
+    #                                    " 0; 0; 0; 0; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0; 0;"
+    #                                    " 0; 0; 0; 0; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0; 0"),
+    #                                dtype=float)
     # 11, 16, 31, 34
-    test_survival_labels = np.mat((
-                                "0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 2; 2; 2; "
-                                "0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 2; 2; 2; "
-                                "0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 2; 2; 2; "
-                                "0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 2; 2; 2 "),
-                                dtype=float)
-
-    test_grad_labels = np.mat((
-                                " 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0; 0; 0;"
-                                " 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0; 0; 0;"
-                                " 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0; 0; 0; "
-                                " 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0; 0; 0"),
-                                  dtype=float)
+    # test_survival = np.mat((
+    #                             "0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 2; 2; 2; "
+    #                             "0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 2; 2; 2; "
+    #                             "0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 2; 2; 2; "
+    #                             "0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 2; 2; 2 "),
+    #                             dtype=float)
+    #
+    # test_grad = np.mat((
+    #                             " 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0; 0; 0;"
+    #                             " 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0; 0; 0;"
+    #                             " 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0; 0; 0; "
+    #                             " 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0; 0; 0"),
+    #                               dtype=float)
+ #======================================================================================== 3_data_hg for 2D
+    # 2, 3, 10, 20, 21, 22, 23, 27, 30, 35, 40
+    # train_survival = np.mat((
+    #                             " 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;      1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;   2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2;    0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;    2; 2; 2; 2; 2; 2; 2; 2; 2; 2;     1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;      0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;        0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;     1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;   1; 1; 1; 1; 1;   1; 1; 1; 1; 1; 1; 1; 1; 1; 1;"
+    #                             " 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;      1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;   2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2;    0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;    2; 2; 2; 2; 2; 2; 2; 2; 2; 2;     1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;      0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;        0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;     1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;   1; 1; 1; 1; 1;   1; 1; 1; 1; 1; 1; 1; 1; 1; 1;"
+    #                             " 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;      1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;   2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2;    0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;    2; 2; 2; 2; 2; 2; 2; 2; 2; 2;     1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;      0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;        0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;     1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;   1; 1; 1; 1; 1;   1; 1; 1; 1; 1; 1; 1; 1; 1; 1;"
+    #                             " 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;      1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;   2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2;    0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;    2; 2; 2; 2; 2; 2; 2; 2; 2; 2;     1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;      0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;        0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;     1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;   1; 1; 1; 1; 1;   1; 1; 1; 1; 1; 1; 1; 1; 1; 1"
+    #                             ),dtype=float)
+    #
+    # train_grad = np.mat((
+    #                              "1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;        0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;     0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;    0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;    1; 1; 1; 1; 1; 1; 1; 1; 1; 1;     1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;        1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;     1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;    1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;    1; 1; 1; 1; 1;  1; 1; 1; 1; 1; 1; 1; 1; 1; 1;"
+    #                              "1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;        0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;     0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;    0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;    1; 1; 1; 1; 1; 1; 1; 1; 1; 1;     1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;        1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;     1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;    1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;    1; 1; 1; 1; 1;  1; 1; 1; 1; 1; 1; 1; 1; 1; 1;"
+    #                              "1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;        0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;     0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;    0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;    1; 1; 1; 1; 1; 1; 1; 1; 1; 1;     1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;        1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;     1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;    1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;    1; 1; 1; 1; 1;  1; 1; 1; 1; 1; 1; 1; 1; 1; 1;"
+    #                              "1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;        0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;     0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;    0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;    1; 1; 1; 1; 1; 1; 1; 1; 1; 1;     1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;        1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;     1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;    1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;    1; 1; 1; 1; 1;  1; 1; 1; 1; 1; 1; 1; 1; 1; 1"
+    #                             ), dtype=float)
+    # 4, 13, 17, 25, 46
+    # valid_survival = np.mat((
+    #                           " 0; 0; 0; 0;0; 0; 0; 0;0; 0; 0; 0;0; 0; 0; 0;0; 0; 0; 0;       1; 1;1; 1;1; 1;1; 1;1; 1;    2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2;    0; 0; 0; 0; 0; 0; 0; 0; 0; 0;0; 0; 0; 0; 0;0; 0; 0; 0; 0;0; 0; 0; 0; 0;    2; 2;2; 2;2; 2;2; 2;2; 2;"
+    #                           " 0; 0; 0; 0;0; 0; 0; 0;0; 0; 0; 0;0; 0; 0; 0;0; 0; 0; 0;       1; 1;1; 1;1; 1;1; 1;1; 1;    2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2;    0; 0; 0; 0; 0; 0; 0; 0; 0; 0;0; 0; 0; 0; 0;0; 0; 0; 0; 0;0; 0; 0; 0; 0;    2; 2;2; 2;2; 2;2; 2;2; 2;"
+    #                           " 0; 0; 0; 0;0; 0; 0; 0;0; 0; 0; 0;0; 0; 0; 0;0; 0; 0; 0;       1; 1;1; 1;1; 1;1; 1;1; 1;    2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2;    0; 0; 0; 0; 0; 0; 0; 0; 0; 0;0; 0; 0; 0; 0;0; 0; 0; 0; 0;0; 0; 0; 0; 0;    2; 2;2; 2;2; 2;2; 2;2; 2;"
+    #                           " 0; 0; 0; 0;0; 0; 0; 0;0; 0; 0; 0;0; 0; 0; 0;0; 0; 0; 0;       1; 1;1; 1;1; 1;1; 1;1; 1;    2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2; 2;    0; 0; 0; 0; 0; 0; 0; 0; 0; 0;0; 0; 0; 0; 0;0; 0; 0; 0; 0;0; 0; 0; 0; 0;    2; 2;2; 2;2; 2;2; 2;2; 2"
+    #                             ), dtype=float)
+    #
+    # valid_grad = np.mat((
+    #                          " 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;  1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0; 0;0; 0;0; 0;0; 0;0; 0;"
+    #                          " 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;  1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0; 0;0; 0;0; 0;0; 0;0; 0;"
+    #                           " 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;  1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0; 0;0; 0;0; 0;0; 0;0; 0;"
+    #                           " 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0;  1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 0; 0;0; 0;0; 0;0; 0;0; 0"
+    #                          ), dtype=float)
+    # # 11, 16, 31, 34
+    # test_survival = np.mat((
+    #                          "0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 2; 2; 2;2; 2; 2;2; 2; 2;2; 2; 2;2; 2; 2; "
+    #                          "0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 2; 2; 2;2; 2; 2;2; 2; 2;2; 2; 2;2; 2; 2; "
+    #                          "0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 2; 2; 2;2; 2; 2;2; 2; 2;2; 2; 2;2; 2; 2; "
+    #                          "0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 2; 2; 2;2; 2; 2;2; 2; 2;2; 2; 2;2; 2; 2 "
+    #                         ), dtype=float)
+    #
+    # test_grad = np.mat((
+    #                       " 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;0; 0; 0;0; 0; 0;0; 0; 0;0; 0; 0;0; 0; 0;"
+    #                       " 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;0; 0; 0;0; 0; 0;0; 0; 0;0; 0; 0;0; 0; 0;"
+    #                       " 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;0; 0; 0;0; 0; 0;0; 0; 0;0; 0; 0;0; 0; 0;"
+    #                       " 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1;0; 0; 0;0; 0; 0;0; 0; 0;0; 0; 0;0; 0; 0"
+    #                         ), dtype=float)
     # ========================
 
-    train_survival_labels_cat = (tf.keras.utils.to_categorical(train_survival_labels))
-    train_grad_labels_cat = (tf.keras.utils.to_categorical(train_grad_labels))
-    test_survival_labels_cat = (tf.keras.utils.to_categorical(test_survival_labels))
-    test_grad_labels_cat = (tf.keras.utils.to_categorical(test_grad_labels))
-    valid_survival_labels_cat = (tf.keras.utils.to_categorical(valid_survival_labels))
-    valid_grad_labels_cat = (tf.keras.utils.to_categorical(valid_grad_labels))
+    train_survival_cat = (tf.keras.utils.to_categorical(train_survival))
+    train_grad_cat = (tf.keras.utils.to_categorical(train_grad))
+    test_survival_cat = (tf.keras.utils.to_categorical(test_survival))
+    test_grad_cat = (tf.keras.utils.to_categorical(test_grad))
+    valid_survival_cat = (tf.keras.utils.to_categorical(valid_survival))
+    valid_grad_cat = (tf.keras.utils.to_categorical(valid_grad))
 
 # ================================================================================== Concatenate
     Concat_Train_T1 = np.concatenate((Resized_Train_T1, Rot_90_Train_T1, Rot_lr_Train_T1, Rot_ud_Train_T1), axis=0)
@@ -593,10 +668,91 @@ def train_model():
 
     # train_dataset = np.stack((Concat_Train_T1_norm, Concat_Train_CBV_norm, Concat_Train_MD_nrom), axis=3)  # axis=0:channel first, axis=1:channel last
     # train_dataset = Concat_Train_T1
-    train_T1_norm = tf.keras.utils.normalize(Concat_Train_T1, axis=1)
-    train_dataset =  train_T1_norm.reshape(120, 5, 64, 64, 1)
+    Concat_Train_T1_norm = tf.keras.utils.normalize(Concat_Train_T1, axis=1)
+    # Concat_Train_CBV_norm = tf.keras.utils.normalize(Concat_Train_CBV, axis=1)
+    # Concat_Train_MD_norm = tf.keras.utils.normalize(Concat_Train_MD, axis=1)
+    train_dataset =  Concat_Train_T1_norm.reshape(320, 5, 64, 64, 1)
+# ==========================================================================================================shuffle data for 2D
+    # def shuffle_lists(t1, cbv, md, y_survival, y_grad):
+    #     index_shuf = list(range(1400))
+    #     shuffle(index_shuf)
+    #     t1 = np.hstack([t1[sn]]
+    #                       for sn in index_shuf)
+    #     md = np.hstack([md[sn]]
+    #                       for sn in index_shuf)
+    #     cbv = np.hstack([cbv[sn]]
+    #                       for sn in index_shuf)
+    #     y_survival = np.hstack([y_survival[sn]]
+    #                       for sn in index_shuf)
+    #     y_grad = np.hstack([y_grad[sn]]
+    #                       for sn in index_shuf)
+    #     return t1, md, cbv, y_survival, y_grad
+    #
+    # t1, cbv, md, y_survival, y_grad = shuffle_lists(Concat_Train_T1_norm , Concat_Train_CBV_norm, Concat_Train_MD_norm, train_survival_labels_cat, train_grad_labels_cat)
+    #
+    # t1 = t1.reshape(len(Concat_Train_T1), 64, 64)
+    # cbv = cbv.reshape(len(Concat_Train_CBV), 64, 64)
+    # md = md.reshape(len(Concat_Train_MD), 64, 64)
+    # train_dataset = np.stack((t1, cbv, md), -1)
 
-#===================validation
+    # y_survival_cat = y_survival.reshape(len(train_survival_labels_cat), 3)
+    # y_grad_cat = y_grad.reshape(len(train_grad_labels_cat), 2)
+
+ # ===== ==========================================================================shuffling for 3D
+ #    def shuffle_lists(t1, cbv, md, y_survival, y_grad):
+ #        index_shuf = list([0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95,  100, 105,  110, 115, 120, 125, 130, 135, 140, 145, 150, 155,
+ #                           160, 165, 170, 175, 180, 185, 190, 195, 200, 205, 210, 215, 220, 225, 230, 235, 240, 245, 250, 255, 260, 265, 270, 275, 280, 285, 290, 295,
+ #                           300, 305, 310, 315, 320, 325, 330, 335, 340, 345, 350, 355, 360, 365, 370, 375, 380, 385, 390, 395, 400, 405, 410, 415, 420, 425, 430, 435,
+ #                           440, 445, 450, 455, 460, 465, 470, 475, 480, 485, 490, 495, 500, 505, 510, 515, 520, 525, 530, 535, 540, 545, 550, 555, 560, 565, 570, 575,
+ #                           580, 585, 590, 595])
+ #
+ #        f = list([0, 1, 2, 3, 4 ])
+ #        shuffle(index_shuf)
+ #
+ #        t1 = np.hstack([t1[sn+n]]
+ #                              for sn in index_shuf
+ #                       for n in f)
+ #        md = np.hstack([md[sn+n]]
+ #                              for sn in index_shuf
+ #                       for n in f)
+ #        cbv = np.hstack([cbv[sn+n]]
+ #                              for sn in index_shuf
+ #                        for n in f)
+ #        y_survival = np.hstack([y_survival[sn]]
+ #                               for sn in index_shuf)
+ #        y_grad = np.hstack([y_grad[sn]]
+ #                              for sn in index_shuf)
+ #
+ #        return t1, cbv, md, y_survival, y_grad
+ #
+ #    t1, cbv, md, y_survival, y_grad= shuffle_lists(Concat_Train_T1_norm, Concat_Train_CBV_norm, Concat_Train_MD_norm, train_survival, train_grad)
+ #
+ #    t1 = t1.reshape(120, 5, 64, 64,1)
+ #    cbv = cbv.reshape(120, 5, 64, 64)
+ #    md = md.reshape(120, 5, 64, 64)
+ #    # train_dataset = np.stack((t1, cbv, md), -1)
+ #    train_dataset =t1
+ #    y_survival = y_survival.reshape(120, 1)
+ #    y_grad = y_grad.reshape(120, 1)
+ #    train_survival_cat = (tf.keras.utils.to_categorical(y_survival))
+ #    train_grad_cat = (tf.keras.utils.to_categorical(y_grad))
+# =====================================
+#     rows = 2
+#     columns = 5
+#     Figure = plt.figure(figsize=(15, 15))
+#     Image_List = [t1[10], t1[11], t1[12], t1[13], t1[14],
+#                  cbv[10], cbv[11], cbv[12], cbv[13], cbv[14]]
+#
+#                   # t1[160], t1[161], t1[162], t1[163], t1[164],
+#                   # cbv[160], cbv[161], cbv[162], cbv[163], cbv[164]]
+#
+#     for i in range(1, rows * columns + 1):
+#         Image = Image_List[i - 1]
+#         Sub_Plot_Image = Figure.add_subplot(rows, columns, i)
+#         Sub_Plot_Image.imshow(np.squeeze(Image))
+#     plt.show()
+
+    #===================validation
     Concat_Valid_T1 = np.concatenate((Resized_Valid_T1, Rot_90_Valid_T1, Rot_lr_Valid_T1, Rot_ud_Valid_T1), axis=0)
     # Concat_Valid_CBV = np.concatenate((Resized_Valid_CBV, Rot_90_Valid_CBV, Rot_lr_Valid_CBV, Rot_ud_Valid_CBV), axis=0)
     # Concat_Valid_MD = np.concatenate((Resized_Valid_MD, Rot_90_Valid_MD, Rot_lr_Valid_MD, Rot_ud_Valid_MD), axis=0)
@@ -611,7 +767,7 @@ def train_model():
     # valid_dataset = np.stack((Concat_Valid_T1_norm, Concat_Valid_MD_norm, Concat_Valid_CBV_norm), axis=3)  # axis=0:channel first, axis=1:channel last
     valid_T1_norm = tf.keras.utils.normalize(Concat_Valid_T1, axis=1)
     # valid_dataset = valid_T1_norm
-    valid_dataset = valid_T1_norm .reshape(64, 5, 64, 64, 1)
+    valid_dataset = valid_T1_norm.reshape(68, 5, 64, 64, 1)
 
 #============== test
     Concat_Test_T1 = np.concatenate((Resized_Test_T1, Rot_90_Test_T1, Rot_lr_Test_T1, Rot_ud_Test_T1), axis=0)
@@ -628,52 +784,33 @@ def train_model():
     #
     # test_dataset = np.stack((Concat_Test_T1_norm, Concat_Test_CBV_norm, Concat_Test_MD_norm), axis=-1)
     test_T1_norm = tf.keras.utils.normalize(Concat_Test_T1, axis=1)
-    # test_dataset = test_T1_norm
-    test_dataset = test_T1_norm .reshape(56, 5, 64, 64, 1)
- #==========================================================================================================shuffle data
-    # def shuffle_lists(t1, md, cbv, y_survival_cat, y_grad_cat):
-    #     index_shuf = list(range(1400))
-    #     shuffle(index_shuf)
-    #     t1_sn = np.hstack([t1[sn]]
-    #                       for sn in index_shuf)
-    #     md_sn = np.hstack([md[sn]]
-    #                       for sn in index_shuf)
-    #     cbv_sn = np.hstack([cbv[sn]]
-    #                       for sn in index_shuf)
-    #     y_survival_cat_sn = np.hstack([y_survival_cat[sn]]
-    #                       for sn in index_shuf)
-    #     y_grad_cat_sn = np.hstack([y_grad_cat[sn]]
-    #                       for sn in index_shuf)
-    #     return t1_sn, md_sn, cbv_sn, y_survival_cat_sn, y_grad_cat_sn
+    test_dataset = test_T1_norm.reshape(40, 5, 64, 64, 1)
+#================================================
+    # rows = 2
+    # columns = 5
+    # Figure = plt.figure(figsize=(15, 15))
+    # Image_List = [aa[10], aa[11], aa[12], aa[13], aa[14], bb[10], bb[11], bb[12], bb[13], bb[14]]
     #
-    # t1_sn, cbv_sn, md_sn, y_survival_cat_sn, y_grad_cat_sn = shuffle_lists(Concat_Train_T1_norm , Concat_Train_CBV_norm, Concat_Train_MD_norm, train_survival_labels_cat, train_grad_labels_cat)
-    #
-    # t1_sn = t1_sn.reshape(len(Concat_Train_T1), 64, 64)
-    # cbv_sn = cbv_sn.reshape(len(Concat_Train_CBV), 64, 64)
-    # md_sn = md_sn.reshape(len(Concat_Train_MD), 64, 64)
-    #
-    # y_survival_cat_sn = y_survival_cat_sn.reshape(len(train_survival_labels_cat), 3)
-    # y_grad_cat_sn = y_grad_cat_sn.reshape(len(train_grad_labels_cat), 2)
+    # for i in range(1, rows * columns + 1):
+    #     Image = Image_List[i - 1]
+    #     Sub_Plot_Image = Figure.add_subplot(rows, columns, i)
+    #     Sub_Plot_Image.imshow(np.squeeze(Image))
+    # plt.show()
 
-    # train_dataset = np.stack((t1_sn, cbv_sn, md_sn), -1)
-
-#==========================================================================
-    # train_dataset = train_dataset[..., np.newaxis]
-    #train_dataset = train_dataset.astype('float32') / 255.
-    # train_dataset = tf.keras.utils.normalize(train_dataset, axis=1)
 #==================================================================================
-    logno =16
+    logno =34
     length = 64
     channel = 1
     volume = 5
-    batch_size = 5
+    batch_size = 32
     learning_rate = 0.000001
-    n_output_survival = 3
+    n_output_survival = 2
     n_output_grad = 2
     total_size = train_dataset.shape[0]
 
     ########################################################################
     input = tf.placeholder(tf.float32, [None, volume, length, length, channel], name='input')
+    input2 = tf.keras.Input(shape= (5, 64, 64, 1))
     labels_grad = tf.placeholder(tf.float32, [None, n_output_grad], name='grad_labels')
     labels_survival = tf.placeholder(tf.float32, [None, n_output_survival], name='survival_labels')
     is_training = tf.placeholder(tf.bool,name='is_training')
@@ -694,17 +831,17 @@ def train_model():
 
     )
 
-    # output_grad,output_survival = net._build_net(input, is_training)
-    output_grad = net._build_net(input, is_training)
+    output_grad,output_survival = net._build_net(input, is_training)
+    # output_survival = net._build_net(input, is_training)
 
 
-    accuracy_grad = accuracy(output_grad, labels_grad)
+    accuracy_survival = accuracy(output_survival, labels_survival)
     # accuracy_survival = accuracy(output_survival, labels_survival)
     # age_nb_true_pred = 0
     # age_nb_true_pred += self.sess.run(self.age_true_pred, feed_dict)
     # age_train_acc = age_nb_true_pred * 1.0 / age_nb_train#############################
 
-    tf.summary.scalar("accuracy_grade", accuracy_grad)
+    tf.summary.scalar("accuracy_survival", accuracy_survival)
     # tf.summary.scalar("accuracy_survival", accuracy_survival)
 
     sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
@@ -717,8 +854,8 @@ def train_model():
     epoch = 15000
 
     with tf.variable_scope('loss'):
-        cross_entropy = - tf.reduce_mean(labels_grad * tf.log(output_grad))\
-                        +tf.reduce_mean((labels_grad+output_grad)- 2 * (labels_grad * output_grad ))
+        cross_entropy = - tf.reduce_mean(labels_survival * tf.log(output_survival))\
+                        + tf.reduce_mean((labels_survival + output_survival)- 2 * (labels_survival * output_survival ))
             # -sumx in X P(x) * log(Q(x))
     tf.summary.scalar("cross_entropy", cross_entropy)
 
@@ -761,23 +898,23 @@ def train_model():
             point=point+1
             mini_indices = indices[ite*batch_size:(ite+1)*batch_size]
             batch_x = train_dataset[mini_indices, :, :, :]
-            batch_y_grad = train_grad_labels_cat[mini_indices, :]
+            batch_y_survival = train_survival_cat[mini_indices, :]
             # batch_y_survival = train_survival_labels_cat[mini_indices, :]
 
             # train eval network
             # _, cost,sum_train,pred_grad,pred_survival,acc_g,acc_s= sess.run([train_op, cross_entropy,
             #                                                       summ,output_grad,output_survival,accuracy_grade,accuracy_survival],
-            _, cost, sum_train, pred_grad, acc_g = sess.run([train_op, cross_entropy, summ, output_grad, accuracy_grad],
+            _, cost, sum_train, pred_survival, acc_s = sess.run([train_op, cross_entropy, summ, output_survival, accuracy_survival],
                                          feed_dict={input:batch_x,
-                                             labels_grad: batch_y_grad,
-                                             # labels_survival: batch_y_survival,
+                                             # labels_grad: batch_y_grad,
+                                             labels_survival: batch_y_survival,
                                              is_training:True,
 
                                          })
 
             # print('******Train, step: %d , loss: %f, ,acc_g :%f, acc_s:%f *******' % ( point, cost,acc_g,acc_s))
-            print('******Train, step: %d , loss: %f, , acc_g:%f *******' % (point, cost, acc_g))
-            print(pred_grad, batch_y_grad)
+            print('******Train, step: %d , loss: %f, , acc_s:%f *******' % (point, cost, acc_s))
+            print(pred_survival, batch_y_survival)
 
 
             train_writer.add_summary(sum_train, point)
@@ -786,11 +923,11 @@ def train_model():
 
             # cost_vl, rs,pred_grad,pred_survival,acc_g,acc_s  = sess.run(
             #     [cross_entropy, summ,output_grad,output_survival,accuracy_grade,accuracy_survival],
-            cost_vl, rs, pred_grad, acc_g = sess.run(
-                [cross_entropy, summ, output_grad, accuracy_grad],
+            cost_vl, rs, pred_survival, acc_s = sess.run(
+                [cross_entropy, summ, output_survival, accuracy_survival],
                 feed_dict = {
-                    labels_grad: valid_grad_labels_cat,
-                    # labels_survival: valid_survival_labels_cat,
+                    # labels_grad: valid_grad_labels_cat,
+                    labels_survival: valid_survival_cat,
                     input: valid_dataset, is_training: False,
 
                 })
@@ -802,14 +939,14 @@ def train_model():
                 validation_writer.flush()
 
             # print('******Validation, step: %d , loss: %f,acc_g :%f, acc_s:%f*******' % (point, cost_vl,acc_g,acc_s))
-            print('******Validation, step: %d , loss: %f, acc_g:%f*******' % (point, cost_vl, acc_g))
+            print('******Validation, step: %d , loss: %f, acc_s:%f*******' % (point, cost_vl, acc_s))
             # print(output_grad, labels_grad)
 
             # cost_vl, rs,pred_grad,pred_survival,acc_g,acc_s  = sess.run( [cross_entropy, summ,output_grad,output_survival,accuracy_grade,accuracy_survival],
-            cost_vl, rs, pred_grad, acc_g  = sess.run( [cross_entropy, summ, output_grad, accuracy_grad],
+            cost_vl, rs, pred_survival, acc_s  = sess.run( [cross_entropy, summ, output_survival, accuracy_survival],
 
                feed_dict = {
-                    labels_grad: test_grad_labels_cat,
+                    labels_survival: test_survival_cat,
                     # labels_survival: test_survival_labels_cat,
                     input: test_dataset, is_training: False,
                })
@@ -818,8 +955,8 @@ def train_model():
             if i % 20 == 0:
                 train_writer.flush()
                 test_writer.flush()
-            print('******Test, step: %d , loss: %f, acc_g:%f*******' % (point, cost_vl, acc_g))
-            print(output_grad, labels_grad)
+            print('******Test, step: %d , loss: %f, acc_s:%f*******' % (point, cost_vl, acc_s))
+            print(output_survival, labels_survival)
 
             if i%50==0:
                 # saver = tf.train.Saver()

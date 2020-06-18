@@ -529,10 +529,10 @@ def train_model():
     #       " 1; 1; 1;   1; 1; 1; 1;     1; 1; 1;     0; 0; 0;      0; 0;    0"),dtype=float)
 # ===================================================================================================== 3_data_hg
     #2, 3, 10, 20, 21, 22, 23, 27, 30, 35, 40
-    train_survival_labels = np.mat((    " 1; 1; 1;      1; 1; 1;   2; 2; 2;     0; 0; 0;    2; 2;       1; 1; 1;     0; 0; 0; 0;         0; 0; 0;    1; 1; 1;   1;    1; 1;"
-                                         "1; 1; 1; 1; 1; 1; 2; 2; 2; 0; 0; 0; 2; 2; 2; 2; 2; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1; 0; 1; 1;"
-                                         "1; 1; 1; 1; 1; 1; 2; 2; 2; 0; 0; 0; 2; 2; 2; 2; 2; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1; 0; 1; 1;"
-                                         "1; 1; 1; 1; 1; 1; 2; 2; 2; 0; 0; 0; 2; 2; 2; 2; 2; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1; 0; 1; 1,"),
+    train_survival_labels = np.mat((    " 0; 0; 0; 0; 0; 0; 1; 1; 1; 0; 0; 0;           1; 1;  0; 0; 0;     0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1;"
+                                         "0; 0; 0; 0; 0; 0; 1; 1; 1; 0; 0; 0;           1; 1;  0; 0; 0;     0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1; 1;"
+                                         "0; 0; 0; 0; 0; 0; 1; 1; 1; 0; 0; 0;           1; 1;  0; 0; 0;     0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1; 1;"
+                                         "0; 0; 0; 0; 0; 0; 1; 1; 1; 0; 0; 0;           1; 1;  0; 0; 0;     0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1; 1"),
                                          dtype=float)
 
     train_grad_labels = np.mat((
@@ -543,10 +543,10 @@ def train_model():
                                         dtype=float)
     # 4, 13, 17, 25, 46
     valid_survival_labels = np.mat((
-                                        " 0; 0; 0; 0;       1; 1;    2; 2; 2;    0; 0; 0; 0; 0;     2; 2;"
-                                        " 0; 0; 0; 0; 1; 1; 2; 2; 2; 0; 0; 0; 0; 0; 2; 2;"
-                                        " 0; 0; 0; 0; 1; 1; 2; 2; 2; 0; 0; 0; 0; 0; 2; 2;"
-                                        " 0; 0; 0; 0; 1; 1; 2; 2; 2; 0; 0; 0; 0; 0; 2; 2"),
+                                        " 0; 0; 0; 0; 0; 0;  1; 1; 1; 0; 0; 0; 0; 0; 1; 1; "
+                                        " 0; 0; 0; 0; 0; 0;  1; 1; 1; 0; 0; 0; 0; 0; 1; 1; "
+                                        " 0; 0; 0; 0; 0; 0;  1; 1; 1; 0; 0; 0; 0; 0; 1; 1; "
+                                        " 0; 0; 0; 0; 0; 0;  1; 1; 1; 0; 0; 0; 0; 0; 1; 1"),
                                         dtype=float)
 
     valid_grad_labels = np.mat((
@@ -557,10 +557,10 @@ def train_model():
                                    dtype=float)
     # 11, 16, 31, 34
     test_survival_labels = np.mat((
-                                "0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 2; 2; 2; "
-                                "0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 2; 2; 2; "
-                                "0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 2; 2; 2; "
-                                "0; 0; 0; 0; 0; 0; 1; 1; 1; 1; 1; 2; 2; 2 "),
+                                "0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1;  "
+                                "0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1;  "
+                                "0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1;  "
+                                "0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 1; 1; 1 "),
                                 dtype=float)
 
     test_grad_labels = np.mat((
@@ -661,13 +661,13 @@ def train_model():
     # train_dataset = tf.keras.utils.normalize(train_dataset, axis=1)
 
 #==================================================================================
-    logno =15
+    logno =35
     length = 64
     channel = 1
     volume = 5
     batch_size = 10
     learning_rate = 0.000001
-    n_output_survival = 3
+    n_output_survival = 2
     n_output_grad = 2
     total_size = train_dataset.shape[0]
 
@@ -710,9 +710,9 @@ def train_model():
 
     with tf.variable_scope('loss'):
         cross_entropy = -tf.reduce_mean(labels_grad * tf.log(output_grad))\
-                        -tf.reduce_mean(labels_survival * tf.log(output_survival)) \
-                        + tf.reduce_mean((tf.math.add(labels_grad, output_grad) - 2 * labels_grad * output_grad ))\
-                        + tf.reduce_mean((tf.math.add(labels_survival, output_survival) - 2 * labels_survival * output_survival))
+                        -tf.reduce_mean(labels_survival * tf.log(output_survival))\
+                        # + tf.reduce_mean((labels_grad + output_grad) - 2 * (labels_grad * output_grad ))\
+                        # + tf.reduce_mean((labels_survival + output_survival) - 2 * (labels_survival * output_survival))
 
         # +int(labels_grad) + int(output_grad) - 2* labels_grad * output_grad \
                         # +labels_survival + output_survival - 2* labels_survival * output_survival
