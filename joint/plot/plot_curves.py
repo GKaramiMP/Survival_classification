@@ -6,6 +6,7 @@ import os
 import tensorflow as tf
 from matplotlib.font_manager import FontProperties
 from matplotlib import colors as mcolors
+from matplotlib.ticker import (AutoMinorLocator, MultipleLocator)
 
 def smooth_curve(y, box_pts):
     box = np.ones(box_pts)/box_pts
@@ -86,7 +87,19 @@ if __name__=='__main__':
     plt.ylabel('Loss function')
     plt.xlabel('Time point')
     plt.xlim([0, end_lim])
+    plt.grid()
     ax2.legend()
+
+    # major_ticks = np.arange(0, end_lim, 10000)
+    # minor_ticks = np.arange(0, end_lim, 5000)
+    # ax2.set_xticks(major_ticks)
+    # ax2.set_xticks(minor_ticks, minor=True)
+    # ax2.set_yticks(major_ticks)
+    # ax2.set_yticks(minor_ticks, minor=True)
+    # ax2.grid(which='both')
+    # ax2.grid(which='minor', alpha=0.2)
+    # ax2.grid(which='major', alpha=0.5)
+
 
     ax1 = fig.add_subplot(gs[0, 1])  # First row, first column
     # plt.plot(rng, smooth_curve(accuracy_survival, 1), c='#fed0fc', alpha=.6)
@@ -96,6 +109,7 @@ if __name__=='__main__':
     plt.ylabel('Survival accuracy')
     plt.xlabel('Time point')
     plt.xlim([0,end_lim])
+    plt.grid()
     ax1.legend()
 
     ax3 = fig.add_subplot(gs[0, 2])  # First row, first column
@@ -106,6 +120,7 @@ if __name__=='__main__':
     plt.ylabel('Grading accuracy')
     plt.xlabel('Time point')
     plt.xlim([0, end_lim])
+    plt.grid()
     ax3.legend()
 
     plt.show()

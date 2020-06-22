@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="04ddbb9e-5eae-4a22-ba11-7d923ec94632" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/joint/fortest.py" beforeDir="false" afterPath="$PROJECT_DIR$/joint/fortest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/joint/job.sh" beforeDir="false" afterPath="$PROJECT_DIR$/joint/job.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/joint/jointly.py" beforeDir="false" afterPath="$PROJECT_DIR$/joint/jointly.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/joint/jointlysingle.py" beforeDir="false" afterPath="$PROJECT_DIR$/joint/jointlysingle.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/joint/net.py" beforeDir="false" afterPath="$PROJECT_DIR$/joint/net.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/joint/plot/plot_curves.py" beforeDir="false" afterPath="$PROJECT_DIR$/joint/plot/plot_curves.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,13 +59,44 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="-1470375152">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.3" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="py" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Python" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="140" />
+          <entry key="txt" value="11" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="PLAIN_TEXT" value="11" />
+          <entry key="Python" value="140" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/joint/jointlysingle.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5895">
+            <state relative-caret-position="13260">
               <caret line="884" column="53" selection-start-line="884" selection-start-column="53" selection-end-line="884" selection-end-column="53" />
               <folding>
                 <element signature="e#1#10#0" expanded="true" />
@@ -79,20 +105,32 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/joint/jointly.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="663" column="13" selection-start-line="663" selection-start-column="13" selection-end-line="663" selection-end-column="13" />
+            <state relative-caret-position="179">
+              <caret line="681" column="14" selection-start-line="681" selection-start-column="14" selection-end-line="681" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/joint/plot/plot_curves.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="783">
+              <caret line="122" column="13" selection-start-line="122" selection-start-column="13" selection-end-line="122" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/joint/net.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7">
-              <caret line="220" column="61" lean-forward="true" selection-start-line="220" selection-start-column="61" selection-end-line="220" selection-end-column="61" />
+            <state relative-caret-position="133">
+              <caret line="63" column="26" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="26" />
               <folding>
                 <element signature="e#1#19#0" expanded="true" />
               </folding>
@@ -112,8 +150,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/joint/net3D.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3045">
-              <caret line="206" column="22" selection-start-line="206" selection-start-column="16" selection-end-line="206" selection-end-column="22" />
+            <state relative-caret-position="655">
+              <caret line="196" column="60" lean-forward="true" selection-start-line="196" selection-start-column="60" selection-end-line="196" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -139,7 +177,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/joint/fortest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
+            <state relative-caret-position="525">
               <caret line="41" selection-start-line="41" selection-end-line="41" />
               <folding>
                 <element signature="e#1#19#0" expanded="true" />
@@ -149,6 +187,13 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -162,13 +207,14 @@
       <find>valid</find>
       <find>_bias_variable</find>
       <find>save</find>
-      <find>net</find>
       <find>opt</find>
       <find>.run</find>
       <find>betas</find>
       <find>labels_grad</find>
       <find>output_grad</find>
       <find>cross</find>
+      <find>net</find>
+      <find>MultiHeadsAttModel</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -188,13 +234,15 @@
         <option value="$PROJECT_DIR$/joint/net.py" />
         <option value="$PROJECT_DIR$/joint/jointlysingle.py" />
         <option value="$PROJECT_DIR$/joint/jointly.py" />
+        <option value="$PROJECT_DIR$/joint/plot/plot_curves.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1536" />
-    <option name="height" value="801" />
+    <option name="x" value="8" />
+    <option name="y" value="30" />
+    <option name="width" value="1276" />
+    <option name="height" value="738" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -209,13 +257,19 @@
         <subPane>
           <expand>
             <path>
-              <item name="survival_classification" type="b2602c69:ProjectViewProjectNode" />
-              <item name="survival_classification" type="462c0819:PsiDirectoryNode" />
+              <item name="Survival_classification" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Survival_classification" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="survival_classification" type="b2602c69:ProjectViewProjectNode" />
-              <item name="survival_classification" type="462c0819:PsiDirectoryNode" />
+              <item name="Survival_classification" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Survival_classification" type="462c0819:PsiDirectoryNode" />
               <item name="joint" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Survival_classification" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Survival_classification" type="462c0819:PsiDirectoryNode" />
+              <item name="joint" type="462c0819:PsiDirectoryNode" />
+              <item name="plot" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -244,7 +298,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.jointly">
+  <component name="RunManager" selected="Python.plot_curves">
     <configuration name="job.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
       <module name="survival_classification" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -254,27 +308,6 @@
       <option name="PARENT_ENVS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/joint/job.sh" />
       <option name="PARAMETERS" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="fortest" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="survival_classification" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/joint" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/joint/fortest.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="jointly" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -319,6 +352,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="plot_curves" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="survival_classification" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/joint/plot" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/joint/plot/plot_curves.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="submit_job" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="survival_classification" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -342,18 +396,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.submit_job" />
-      <item itemvalue="Python.fortest" />
       <item itemvalue="Python.jointlysingle" />
       <item itemvalue="Bash.job.sh" />
       <item itemvalue="Python.jointly" />
+      <item itemvalue="Python.plot_curves" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.plot_curves" />
         <item itemvalue="Python.jointly" />
         <item itemvalue="Python.jointlysingle" />
         <item itemvalue="Python.submit_job" />
         <item itemvalue="Bash.job.sh" />
-        <item itemvalue="Python.fortest" />
       </list>
     </recent_temporary>
   </component>
@@ -424,19 +478,41 @@
       <option name="project" value="LOCAL" />
       <updated>1591959364786</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="plot curves">
+      <created>1592489212240</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1592489212240</updated>
+    </task>
+    <task id="LOCAL-00010" summary="plot curves">
+      <created>1592489302581</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1592489302581</updated>
+    </task>
+    <task id="LOCAL-00011" summary="plot curves">
+      <created>1592493417536</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1592493417536</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1536" height="801" extended-state="1" />
+    <frame x="0" y="22" width="1280" height="738" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.59618443" visible="true" weight="0.089108914" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.59618443" visible="true" weight="0.19142176" />
       <window_info id="Structure" order="1" sideWeight="0.40381557" side_tool="true" weight="0.20330033" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.47360703" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.26832846" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.25505444" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.20528771" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -456,7 +532,8 @@
     <MESSAGE value="survival classification" />
     <MESSAGE value="single task" />
     <MESSAGE value="single task &amp; multi task" />
-    <option name="LAST_COMMIT_MESSAGE" value="single task &amp; multi task" />
+    <MESSAGE value="plot curves" />
+    <option name="LAST_COMMIT_MESSAGE" value="plot curves" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -465,6 +542,11 @@
           <url>file://$PROJECT_DIR$/joint/fortest.py</url>
           <line>41</line>
           <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/joint/plot/plot_curves.py</url>
+          <line>50</line>
+          <option name="timeStamp" value="33" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -478,6 +560,11 @@
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string>e.summary.value</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>with tf.variable_scope('fc1'):
             flat_input1 = tf.reshape(drop5, [-1, 1 * 8 * 8 * 32])
@@ -525,11 +612,6 @@
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>tf.reduce_sum(tf.cast(tf.argmax(predictions, 1) == tf.argmax(labels, 1),tf.uint8))</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
@@ -547,34 +629,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/numpy/core/fromnumeric.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="46" selection-start-line="46" selection-end-line="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/tensorflow/python/keras/utils/conv_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="74" selection-start-line="74" selection-end-line="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/tensorflow/python/keras/layers/pooling.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="419" selection-start-line="419" selection-end-line="419" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/joint/singletask_jointly.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="716" lean-forward="true" selection-end-line="886" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/numpy/core/fromnumeric.py" />
+    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/tensorflow/python/keras/utils/conv_utils.py" />
+    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/tensorflow/python/keras/layers/pooling.py" />
+    <entry file="file://$PROJECT_DIR$/joint/singletask_jointly.py" />
     <entry file="file://$PROJECT_DIR$/joint/singletask_net.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="498">
@@ -585,41 +643,11 @@
     <entry file="file://$PROJECT_DIR$/joint/networksingle.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/tensorflow/python/framework/ops.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="458" selection-start-line="458" selection-end-line="458" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../multi-heads-attention-mnist.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="17" column="24" lean-forward="true" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/joint/multi-heads-attention-mnist.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3300">
-          <caret line="256" column="34" selection-start-line="256" selection-start-column="34" selection-end-line="256" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/numpy/matrixlib/defmatrix.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2940">
-          <caret line="196" selection-start-line="196" selection-end-line="196" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/tensorflow/python/client/session.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="1347" selection-start-line="1347" selection-end-line="1347" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/tensorflow/python/framework/ops.py" />
+    <entry file="file://$PROJECT_DIR$/../multi-heads-attention-mnist.py" />
+    <entry file="file://$PROJECT_DIR$/joint/multi-heads-attention-mnist.py" />
+    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/numpy/matrixlib/defmatrix.py" />
+    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/tensorflow/python/client/session.py" />
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -634,24 +662,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/matplotlib/image.py">
+    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/matplotlib/image.py" />
+    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/tensorflow/python/keras/engine/network.py" />
+    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/keras/engine/network.py" />
+    <entry file="file://$PROJECT_DIR$/joint/jointlysingle.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="698" selection-start-line="698" selection-end-line="698" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/tensorflow/python/keras/engine/network.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="223" selection-start-line="223" selection-end-line="223" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../Program/TF112/lib/python3.6/site-packages/keras/engine/network.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="13260">
+          <caret line="884" column="53" selection-start-line="884" selection-start-column="53" selection-end-line="884" selection-end-column="53" />
+          <folding>
+            <element signature="e#1#10#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -662,20 +682,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/joint/net3D.py">
+    <entry file="file://$PROJECT_DIR$/joint/submit_job.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3045">
-          <caret line="206" column="22" selection-start-line="206" selection-start-column="16" selection-end-line="206" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/joint/fortest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="41" selection-start-line="41" selection-end-line="41" />
-          <folding>
-            <element signature="e#1#19#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="60">
+          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -686,37 +696,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/joint/submit_job.py">
+    <entry file="file://$PROJECT_DIR$/joint/fortest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/joint/jointlysingle.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5895">
-          <caret line="884" column="53" selection-start-line="884" selection-start-column="53" selection-end-line="884" selection-end-column="53" />
-          <folding>
-            <element signature="e#1#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/joint/net.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7">
-          <caret line="220" column="61" lean-forward="true" selection-start-line="220" selection-start-column="61" selection-end-line="220" selection-end-column="61" />
+        <state relative-caret-position="525">
+          <caret line="41" selection-start-line="41" selection-end-line="41" />
           <folding>
             <element signature="e#1#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../../Programs/TF112/lib/python3.6/site-packages/tensorflow/python/ops/gen_nn_ops.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="4711" column="44" selection-start-line="4711" selection-start-column="44" selection-end-line="4711" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/joint/net3D.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="655">
+          <caret line="196" column="60" lean-forward="true" selection-start-line="196" selection-start-column="60" selection-end-line="196" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/joint/plot/plot_curves.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="783">
+          <caret line="122" column="13" selection-start-line="122" selection-start-column="13" selection-end-line="122" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/joint/jointly.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="663" column="13" selection-start-line="663" selection-start-column="13" selection-end-line="663" selection-end-column="13" />
+        <state relative-caret-position="179">
+          <caret line="681" column="14" selection-start-line="681" selection-start-column="14" selection-end-line="681" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/joint/net.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="63" column="26" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="26" />
+          <folding>
+            <element signature="e#1#19#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
