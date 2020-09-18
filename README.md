@@ -4,7 +4,7 @@ This project is a CNN based survival classification.
 
 <p>
     <img src="network.png" alt>
-    <em>Figure 1- The 3D deep single task and multi-channel CNNs.</em>
+    <em></em>
 </p>
 
 [![Watch the video](youtube.png)](https://youtu.be/euSkGhheGRw)
