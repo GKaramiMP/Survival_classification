@@ -7,8 +7,6 @@ This project is a CNN based survival classification.
     <em></em>
 </p>
 
-[![Watch the video](youtube.png)](https://youtu.be/euSkGhheGRw)
-
 # Requirments
 
 Tensorflow<2 & python>3.4
