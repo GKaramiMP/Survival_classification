@@ -1,4 +1,6 @@
 # Survival_classification
+If this repository helps you in anyway, show your love :heart: by putting a :star: on this project 
+
 This project is a CNN based survival classification. 
 
 
